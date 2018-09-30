@@ -1,7 +1,5 @@
 class Config {
-
-    load(env)
-    {
+    load(env) {
         return new Promise(resolve => {
             resolve(require(`./${env}`))
         }).then(conf => {
