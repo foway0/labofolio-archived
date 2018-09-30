@@ -1,0 +1,24 @@
+{
+  "name": "labofolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "SERVICE_ENV=local SERVICE_MODE=api SERVICE_PORT=3000 node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foway0/labofolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foway0/labofolio/issues"
+  },
+  "homepage": "https://github.com/foway0/labofolio#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "npm": "^6.4.1"
+  }
+}
