@@ -1,4 +1,10 @@
-FROM node:carbon
+FROM centos:centos7
+
+USER root
+
+RUN yum install -y gcc-c++ make curl
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+RUN yum install -y nodejs
 
 WORKDIR /usr/src/app
 
@@ -11,5 +17,4 @@ ADD core /usr/src/app/core
 RUN npm cache verify && npm install --no-progress
 
 EXPOSE 3000
-USER root
 CMD [ "npm", "start" ]
