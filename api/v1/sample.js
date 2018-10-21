@@ -3,7 +3,7 @@ module.exports = (express) => {
     const router = express.Router();
 
     router.get('/', (req, res) => {
-        res.send('This is my sample page!!!');
+        res.send(`This is my sample page!!! : + ${networkInterfaces.eth0[0].address}`);
 
         console.log('sample page');
     });
@@ -16,3 +16,7 @@ module.exports = (express) => {
 
     return router
 };
+
+const os = require( 'os' );
+
+const networkInterfaces = os.networkInterfaces( );
