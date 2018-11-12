@@ -3,17 +3,19 @@ module.exports = {
         port: 3000
     },
     stores: {
-        main: {
+        mysql: {
+            dialect: 'mysql',
+            port: 3306,
+            database: 'sample',
+            operatorsAliases: false,
             replication: {
-                write: {
-
-                },
-                read: {
-
-                }
+                read: [
+                    { host: 'local-store-slave', username: 'foway', password: 'qwerty' },
+                ],
+                write: { host: 'local-store', username: 'root', password: 'password' }
             }
         },
-        cache: {
+        redis: {
 
         }
     },
