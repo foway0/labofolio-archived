@@ -8,11 +8,14 @@ module.exports = {
             port: 3306,
             database: 'sample',
             operatorsAliases: false,
+            retry: {
+                max: 3,
+            },
             replication: {
                 read: [
                     { host: 'local-store-slave', username: 'foway', password: 'qwerty' },
                 ],
-                write: { host: 'local-store', username: 'root', password: 'password' }
+                write: { host: 'local-store', username: 'foway', password: 'qwerty' }
             }
         },
         redis: {

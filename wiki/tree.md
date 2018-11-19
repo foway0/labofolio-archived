@@ -6,6 +6,9 @@
     + shared
         + config
             + local.js
+        + store
+            + model
+            + mysql.js
         + environment.js
         + constant.js
         + middleware

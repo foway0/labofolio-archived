@@ -1,3 +1,6 @@
+const shared   = require('../../core');
+const services = shared.Dao;
+
 module.exports = (express) => {
 
     const router = express.Router();
@@ -8,10 +11,16 @@ module.exports = (express) => {
         console.log('sample page');
     });
 
-    router.get('/artist', (req, res) => {
-        res.send('This is my sample artist page!!!');
+    // TODO wrap function
 
-        console.log('artist page');
+    router.get('/artist', async(req, res) => {
+
+        console.log('=================');
+        console.log(services);
+        console.log('=================');
+
+        const result = await services.test.getTestById(1);
+        res.status(200).json(result);
     });
 
     return router

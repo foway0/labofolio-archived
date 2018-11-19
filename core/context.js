@@ -40,6 +40,10 @@ class Context {
         await store.mysql.sync(this.stores.mysql);
         console.log(`======================== TODO : sync store ========================`);
     }
+
+    getMysql() {
+        return this.stores.mysql;
+    }
 }
 
 module.exports = new Context();
