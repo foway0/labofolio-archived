@@ -21,7 +21,7 @@ module.exports = (express) => {
 
     router.post(
         '/artist/:sampleId',
-        /*(req, res, next) => {
+        (req, res, next) => {
             req.checkParams('sampleId', 'required').isInt();
             req.getValidationResult()
                 .then(result => {
@@ -31,7 +31,7 @@ module.exports = (express) => {
                     }
                     return next();
                 })
-        },*/ async(req, res) => {
+        }, async(req, res) => {
 
             let struct = {
                 id: req.params.sampleId,

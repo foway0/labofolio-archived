@@ -12,7 +12,7 @@ class Service extends core.Application {
     constructor() {
         super();
 
-        //this.app.use(validation());
+        this.app.use(validation());
 
         for(let route in router) {
 
