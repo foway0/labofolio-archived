@@ -1,5 +1,11 @@
+const os = require( 'os' );
+const networkInterfaces = os.networkInterfaces( );
+
 const shared   = require('../../core');
 const services = shared.Dao;
+
+
+// TODO :: OOP ???
 
 module.exports = (express) => {
 
@@ -13,19 +19,28 @@ module.exports = (express) => {
 
     // TODO wrap function
 
-    router.get('/artist', async(req, res) => {
+    router.post(
+        '/artist/:sampleId',
+        /*(req, res, next) => {
+            req.checkParams('sampleId', 'required').isInt();
+            req.getValidationResult()
+                .then(result => {
+                    if(!result.isEmpty()) {
+                        // TODO : error handler
+                        console.log('hoxy...?');
+                    }
+                    return next();
+                })
+        },*/ async(req, res) => {
 
-        console.log('=================');
-        console.log(services);
-        console.log('=================');
-
-        const result = await services.test.getTestById(1);
-        res.status(200).json(result);
-    });
+            let struct = {
+                id: req.params.sampleId,
+                foo: req.query.foo,
+                hoge: req.body.hoge
+            };
+            struct.data = await services.test.getTestById(struct.id);
+            res.status(200).json(struct);
+        });
 
     return router
 };
-
-const os = require( 'os' );
-
-const networkInterfaces = os.networkInterfaces( );

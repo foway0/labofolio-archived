@@ -1,5 +1,6 @@
-const express = require('express'),
-      http    = require('http');
+const express    = require('express'),
+      http       = require('http'),
+      bodyParser = require('body-parser');
 
 const env = require('./shared').environment;
 
@@ -13,6 +14,7 @@ class Application {
             console.log(`req => localhost:${env.SERVICE_PORT}${req.url}`);
             next();
         });
+        this.app.use(bodyParser.urlencoded({extended: true}));
     }
 
     start() {

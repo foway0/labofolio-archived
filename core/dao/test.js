@@ -6,7 +6,6 @@ module.exports = {
         const test = stores.test(context.getMysql());
 
         return test.findOne({
-            useMaster: true,
             where: {
                 id: id
             }
