@@ -16,4 +16,4 @@ done
 
 # Apply database migrations
 echo "Apply database migrations"
-node index.js
+npm start;

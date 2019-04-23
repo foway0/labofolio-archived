@@ -1,6 +1,12 @@
 const express = require('express');
 
-const port = process.env.SERVICE_PORT;
+const shared = require('./shared');
+const environment = shared.environment;
+const constant = shared.constant;
+
+const port = environment.SERVICE_PORT;
+const env  = environment.SERVICE_ENV;
+const mode = environment.SERVICE_MODE;
 
 const app = express();
 app.set('truest proxy', true);
@@ -19,9 +25,10 @@ app.get('/test', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`localhost:${port} is listening!!!`);
+  console.log(`ENV:${env} MODE:${mode} localhost:${port} is listening!!!`);
 });
 
+// test line
 const Sequelize = require('sequelize');
 
 // Option 1: Passing parameters separately
