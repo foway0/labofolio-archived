@@ -1,6 +1,7 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 // TODO : mode & context
+const utils = require('./utils');
 
 (async () => {
   const shared = require('./shared');
@@ -19,15 +20,36 @@ const Sequelize = require('sequelize');
   });
 
   app.get('/', (req, res) => {
-    res.json('ok');
+    res.status(200).json('ok');
   });
   app.get('/test', (req, res) => {
-    res.json('test');
+    res.status(200).json('test');
   });
   app.get('/ping', async (req, res) => {
     await sequelize.authenticate();
 
     res.json('pong');
+  });
+  app.get('/error/:flag', (req, res) => {
+    const flag = req.params.flag;
+
+    // error handling test
+    if(flag === 'true') {
+      res.json('this is true');
+    } else {
+      throw new utils.error('woops', 'TEST', 500);
+    }
+  });
+  // 404 not found
+  app.get('*', function(req, res){
+    res.status(404).send('what??? (╯°□°）╯︵ ┻━┻');
+  });
+  app.use((err, req, res, next) => {
+    // Will get here
+    res.status(err.statusCode).json({
+      name: err.name,
+      message: err.message,
+    });
   });
 
   app.listen(environment.SERVICE_PORT, () => {

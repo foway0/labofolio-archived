@@ -5,6 +5,6 @@ module.exports = env => {
     case 'prd':
       return require('./prd')(env);
     default:
-      return new Error('env ERROR!');
+      throw Error('env ERROR!');
   }
 };
