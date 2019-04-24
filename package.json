@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/foway0/labofolio#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mysql2": "^1.6.5",
     "sequelize": "^5.7.3"

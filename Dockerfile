@@ -14,6 +14,8 @@ ADD package*.json /usr/src/app/
 ADD wait-for-it.sh /usr/src/app/
 ADD shared /usr/src/app/shared/
 ADD utils /usr/src/app/utils/
+ADD core /usr/src/app/core/
+ADD mode /usr/src/app/mode/
 
 RUN chmod +x /usr/src/app/wait-for-it.sh
 RUN npm cache verify && npm install --no-progress

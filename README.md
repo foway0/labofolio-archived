@@ -37,3 +37,5 @@
     - models [sequelize base]
         - mysql
     - insert-data
+- utils
+    - error handler
