@@ -1,4 +1,4 @@
-module.exports = {
+const environment = {
   SERVICE_ENV: process.env.SERVICE_ENV || 'local',
   SERVICE_PORT: process.env.SERVICE_PORT,
   SERVICE_MODE: process.env.SERVICE_MODE,
@@ -7,3 +7,5 @@ module.exports = {
   SSL_CERT: process.env.SSL_CERT,
   SSL_KEY: process.env.SSL_KEY,
 };
+
+module.exports = Object.freeze(environment);

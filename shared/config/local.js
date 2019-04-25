@@ -2,7 +2,6 @@ module.exports = env => {
   const config = {};
   config.stores = stores(env);
 
-
   return Object.freeze(config);
 };
 

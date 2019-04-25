@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 class Application {
   constructor(env) {
     this.app = express();
-    // TODO
+    // TODO HEADER
     this.app.set('trust proxy', true);
 
     if(env.SSL_CERT && env.SSL_KEY) {
@@ -24,9 +24,17 @@ class Application {
 
     this.app.use((req, res, next) => {
       console.log(`localhost:${env.SERVICE_PORT}${req.url}`);
-      //console.log(req.headers.host);
       next();
     });
+  }
+
+  /**
+   * @param {Object} obj
+   */
+  loadRoutes(obj) {
+    for(let key in obj) {
+      this.app.use(key, obj[key]);
+    }
   }
 
   start(env) {

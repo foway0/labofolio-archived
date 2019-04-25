@@ -6,9 +6,12 @@
   await context.initStores();
 
   let server;
-  if (environment.SERVICE_MODE === 'web-api') {
-    server = require('./mode/api')(environment);
-    server.start(environment);
+  switch (environment.SERVICE_MODE) {
+    case 'web-api':
+      server = require('./mode/web-api/api')(environment);
+      return server.start(environment);
+    default:
+      throw Error('server mode ERROR!');
   }
 })().catch(err => {
   console.log(err);

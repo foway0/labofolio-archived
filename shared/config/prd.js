@@ -1,5 +1,5 @@
 module.exports = env => {
-  return {
+  const config = {};
 
-  }
+  return Object.freeze(config);
 };
