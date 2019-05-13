@@ -40,5 +40,5 @@ class Service extends core.Application {
 }
 
 module.exports = env => {
- return new Service(env);
+  return new Service(env);
 };

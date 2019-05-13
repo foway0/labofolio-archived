@@ -1,4 +1,4 @@
-module.exports = env => {
+module.exports = env => { // eslint-disable-line no-unused-vars
   const constant = {};
   constant.statusCode = statusCode;
 

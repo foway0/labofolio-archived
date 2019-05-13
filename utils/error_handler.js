@@ -4,7 +4,7 @@ class ErrorHandler extends Error
     super();
     this.message = message;
     this.name = name;
-    if(code && typeof code === "number")
+    if(code && typeof code === 'number')
       this.statusCode = code;
 
     Error.captureStackTrace(this, this.constructor);

@@ -23,5 +23,5 @@ const stores = env => {
         write: { host: env.MYSQL_HOST, username: 'foway', password: 'qwerty' }
       }
     }
-  }
+  };
 };

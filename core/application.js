@@ -15,7 +15,7 @@ class Application {
         cert: env.SSL_CERT
       };
 
-      this.server = https.createServer(options, this.app)
+      this.server = https.createServer(options, this.app);
     } else {
       this.server = http.createServer(this.app);
     }
