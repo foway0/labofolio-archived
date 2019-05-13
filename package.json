@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -e js --delay 80ms --exec 'kill-port --port 53000 && node --inspect=0.0.0.0:53000 ./index.js'",
+    "debug": "DEBUG=express:* npm start",
     "eslint": "eslint --ext .js ./"
   },
   "repository": {
@@ -21,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "js-yaml": "^3.13.1",
     "mysql2": "^1.6.5",
     "sequelize": "^5.7.3"
   },
