@@ -1,8 +1,8 @@
 const core = require('../../core');
-const utils = require('../../utils');
 const routes = require('./routes');
 
 const context = core.context;
+const utils = context.getUtils();
 const code = context.getConst().statusCode;
 
 class Service extends core.Application {
