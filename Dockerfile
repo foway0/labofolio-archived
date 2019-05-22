@@ -16,6 +16,7 @@ ADD shared /usr/src/app/shared/
 ADD utils /usr/src/app/utils/
 ADD core /usr/src/app/core/
 ADD mode /usr/src/app/mode/
+ADD tools /usr/src/app/tools/
 
 RUN chmod +x /usr/src/app/wait-for-it.sh
 RUN npm cache verify && npm install --no-progress

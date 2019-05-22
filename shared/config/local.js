@@ -11,6 +11,7 @@ const stores = env => {
       dialect: 'mysql',
       port: 3306,
       database: 'sample',
+      timezone: '+09:00',
       retry: {
         max: 3,
       },

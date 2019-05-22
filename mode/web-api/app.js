@@ -9,6 +9,9 @@ class Service extends core.Application {
 
   constructor(env) {
     super(env);
+  }
+
+  async init() {
     // load route
     super.loadRoutes(routes);
 
@@ -29,6 +32,7 @@ class Service extends core.Application {
     this.app.get('*', (req, res) => {
       res.status(code.NOT_FOUND).send('what??? (╯°□°）╯︵ ┻━┻');
     });
+    // TODO custom error handler oas
     this.app.use((err, req, res, next) => {
       // Will get here
       res.status(err.statusCode).json({

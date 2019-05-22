@@ -8,6 +8,7 @@
   switch (environment.SERVICE_MODE) {
     case 'web-api':
       server = require('./mode/web-api/app')(environment);
+      await server.init();
       return server.start(environment);
     default:
       throw Error('server mode ERROR!');

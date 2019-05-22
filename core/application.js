@@ -2,6 +2,8 @@ const express = require('express');
 const http = require('http');
 const https = require('https');
 const bodyParser = require('body-parser');
+// TODO utils ?
+const sprintf = require('sprintf-js').sprintf;
 
 class Application {
   constructor(env) {
@@ -22,10 +24,13 @@ class Application {
 
     this.app.use(bodyParser.urlencoded({extended: true}));
 
-    this.app.use((req, res, next) => {
-      console.log(`localhost:${env.SERVICE_PORT}${req.url}`);
-      next();
-    });
+    this.app.get('/favicon.ico', (req, res) => res.status(204));
+    if(env.SERVICE_ENV === 'local') {
+      this.app.use((req, res, next) => {
+        console.log(`localhost:${env.SERVICE_PORT}${req.url}`);
+        next();
+      });
+    }
   }
 
   /**
@@ -38,8 +43,12 @@ class Application {
   }
 
   start(env) {
-    this.server.listen(env.SERVICE_PORT);
-    console.log(`ENV:${env.SERVICE_ENV} MODE:${env.SERVICE_MODE} localhost:${env.SERVICE_PORT} is listening!!!`);
+    this.server.listen(env.SERVICE_PORT, () => {
+      if(env.SERVICE_ENV === 'local') {
+        const FORMAT = `ENV:%s MODE:%s localhost:%s is listening!!!`;
+        console.log(sprintf(FORMAT, env.SERVICE_ENV, env.SERVICE_MODE, env.SERVICE_PORT));
+      }
+    });
   }
 }
 

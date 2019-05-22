@@ -39,3 +39,19 @@
     - insert-data
 - utils
     - error handler
+
+## TODO
+
+- nginx proxy server
+- replica ? []
+- async init function ? [o]
+- oas3 []
+- mocha []
+- log []
+- i18next []
+- init data []
+- sample ddl [o]
+- basic auth []
+- migration tools []
+- http header []
+- socket io []

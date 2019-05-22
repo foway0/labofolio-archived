@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 
 const shared = require('../shared');
 const utils  = require('../utils');
+const models = require('../tools/mysql/models');
 
 class Context
 {
@@ -10,6 +11,7 @@ class Context
     this.constant = shared.constant;
     this.config = shared.config;
     this.utils = utils;
+    this.models = models;
     this.stores = {};
   }
 
@@ -30,6 +32,10 @@ class Context
 
   getConst() {
     return this.constant;
+  }
+
+  getModels() {
+    return this.models;
   }
 
   getMysql() {
