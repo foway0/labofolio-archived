@@ -7,36 +7,44 @@ const STATUS = {
 };
 
 // FIXME CHECK DEFINE DATA TYPES
-class Sample extends Sequelize.Model { }
+class Sample extends Sequelize.Model {
+  static init(sequelize) {
+    const attributes = {
+      id: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      status: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        defaultValue: STATUS.valid,
+      },
+      text: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+      }
+    };
+    const options = {
+      sequelize,
+      modelName: TABLE_NAME,
+      timestamps: true,
+      createdAt: 'created',
+      updatedAt: 'modified',
+      charset: 'utf8',
+    };
 
-const attributes = {
-  id: {
-    type: Sequelize.INTEGER.UNSIGNED,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  status: {
-    type: Sequelize.INTEGER.UNSIGNED,
-    allowNull: false,
-    defaultValue: STATUS.valid,
-  },
-  text: {
-    type: Sequelize.STRING(255),
-    allowNull: true,
+    return super.init(attributes, options)
   }
-};
+
+  static getStatus() {
+    return STATUS;
+  }
+}
 
 module.exports = sequelize => {
-  Sample.init(attributes, {
-    sequelize,
-    modelName: TABLE_NAME,
-    timestamps: true,
-    createdAt: 'created',
-    updatedAt: 'modified',
-    charset: 'utf8',
-  });
+  Sample.init(sequelize);
 
   return Sample;
 };
-module.exports.STATUS = STATUS;

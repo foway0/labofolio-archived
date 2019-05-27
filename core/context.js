@@ -4,8 +4,7 @@ const shared = require('../shared');
 const utils  = require('../utils');
 const models = require('../tools/mysql/models');
 
-class Context
-{
+class Context {
   constructor() {
     this.environment = shared.environment;
     this.constant = shared.constant;

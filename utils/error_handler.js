@@ -1,5 +1,4 @@
-class ErrorHandler extends Error
-{
+class ErrorHandler extends Error {
   constructor(message, name, code = null) {
     super();
     this.message = message;

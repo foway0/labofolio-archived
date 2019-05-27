@@ -14,44 +14,42 @@
         - en
         - ja
         - etc
+    - services
 - core
     - middleware
     - context
     - application [parent]
-    - error handling
 - mode [child]
     - chat-api
         - routes
-        - services
     - app-api
         - routes
-        - services
     - web-api
         - routes
-        - services
     - web
         - routes
-        - services
 - tools
     - test
-    - models [sequelize base]
-        - mysql
-    - insert-data
+    - mysql [sequelize base]
+        - models
+    - init_models
+    - init_data
 - utils
     - error handler
+    - parser
 
 ## TODO
 
-- nginx proxy server
-- replica ? []
-- async init function ? [o]
-- oas3 []
-- mocha []
-- log []
-- i18next []
-- init data []
-- sample ddl [o]
-- basic auth []
-- migration tools []
-- http header []
-- socket io []
+- [ ] replica ?
+- [ ] nginx proxy server
+- [x] async init function ?
+- [x] sample ddl
+- [ ] oas3
+- [ ] mocha
+- [ ] log
+- [ ] i18next
+- [ ] init data
+- [ ] basic auth
+- [ ] migration tools
+- [ ] http header
+- [ ] socket io
