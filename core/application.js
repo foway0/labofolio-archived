@@ -1,7 +1,6 @@
 const express = require('express');
 const http = require('http');
 const https = require('https');
-const bodyParser = require('body-parser');
 // TODO utils ?
 const sprintf = require('sprintf-js').sprintf;
 
@@ -22,7 +21,7 @@ class Application {
       this.server = http.createServer(this.app);
     }
 
-    this.app.use(bodyParser.urlencoded({extended: true}));
+    this.app.use(express.urlencoded({extended: true}));
 
     this.app.get('/favicon.ico', (req, res) => res.status(204));
     if(env.SERVICE_ENV === 'local') {
