@@ -35,10 +35,14 @@ class Service extends core.Application {
     // TODO custom error handler oas
     this.app.use((err, req, res, next) => {
       // Will get here
-      res.status(err.statusCode).json({
-        name: err.name,
-        message: err.message,
-      });
+      if(err.statusCode)
+        res.status(err.statusCode).json({
+          name: err.name,
+          message: err.message,
+        });
+      else
+        res.status(code.SERVICE_UNAVAILABLE).end();
+
     });
   }
 }
