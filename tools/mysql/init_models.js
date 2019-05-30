@@ -3,7 +3,7 @@
 
   await context.initStores();
 
-  const sequelize = context.getMysql();
+  const sequelize = context.getStoresMysql();
   const fixtures = [
     require('./models').sample
   ];

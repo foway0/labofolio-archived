@@ -17,10 +17,9 @@ router.get('/error', doAsync(async (req, res) => {
 }));
 
 router.get('/list', doAsync(async (req, res) => {
-  const sequelize = context.getMysql();
-  const sample = context.getModels().sample(sequelize);
-  const STATUS = sample.getStatus();
-  const result = await sample.findAll({
+  const sampleService = context.getStoresServices().sample;
+  const STATUS = sampleService.getStatus();
+  const result = await sampleService.getList({
     where: {
       status: STATUS.valid,
     }

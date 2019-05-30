@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 const shared = require('../shared');
 const utils  = require('../utils');
 const models = require('../tools/mysql/models');
+const services = require('../services');
 
 class Context {
   constructor() {
@@ -12,6 +13,9 @@ class Context {
     this.utils = utils;
     this.models = models;
     this.stores = {};
+    this.stores.mysql = null;
+    this.stores.service = {};
+    this.services = services;
   }
 
   async initStores() {
@@ -23,6 +27,16 @@ class Context {
       .catch(err => {
         console.error('Unable to connect to the database:', err);
       });
+    for(const rec in this.getServices()) {
+      console.log('=======================');
+      console.log(`init: ${[rec]}`)
+      this.stores.service[rec] = services[rec](this.getModels()[rec](this.getStoresMysql()));
+      console.log('=======================');
+    }
+  }
+
+  getServices() {
+    return this.services;
   }
 
   getEnv() {
@@ -37,8 +51,12 @@ class Context {
     return this.models;
   }
 
-  getMysql() {
+  getStoresMysql() {
     return this.stores.mysql;
+  }
+
+  getStoresServices() {
+    return this.stores.service;
   }
 
   getConfigStoresMysql() {

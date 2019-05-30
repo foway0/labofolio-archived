@@ -16,7 +16,7 @@ class Service extends core.Application {
     super.loadRoutes(routes);
 
     this.app.get('/ping', async (req, res) => {
-      const sequelize = context.getMysql();
+      const sequelize = context.getStoresMysql();
       const result = await sequelize.query("SELECT 'pong'", {
         type: sequelize.QueryTypes.SELECT,
         plain: true
