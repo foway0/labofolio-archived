@@ -30,7 +30,7 @@ class Context {
     for(const rec in this.getServices()) {
       console.log('=======================');
       console.log(`init: ${[rec]}`)
-      this.stores.service[rec] = services[rec](this.getModels()[rec](this.getStoresMysql()));
+      this.stores.service[rec] = this.getServices()[rec](this.getModels()[rec](this.getStoresMysql()));
       console.log('=======================');
     }
   }
