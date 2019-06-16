@@ -1,10 +1,16 @@
-module.exports = Sample => {
-  class SampleService extends Sample {
-    static getList(options) {
+const {context} = require('../core');
 
-      return this.findAll(options);
-    }
-  }
+// TODO join 문제로 class 포기... 다른 설계 생각해보기
+module.exports = {
+  getList() {
+    const sample = context.getStoresServices().sample;
+    const STATUS = sample.getStatus();
+    const options = {
+      where: {
+        status: STATUS.valid,
+      }
+    };
 
-  return SampleService;
+    return sample.findAll(options)
+  },
 };

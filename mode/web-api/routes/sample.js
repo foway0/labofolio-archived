@@ -1,6 +1,7 @@
 const express = require('express');
 
 const {context} = require('../../../core');
+const services = context.getServices();
 const code = context.getConst().statusCode;
 const utils = context.getUtils();
 
@@ -17,13 +18,7 @@ router.get('/error', doAsync(async (req, res) => {
 }));
 
 router.get('/list', doAsync(async (req, res) => {
-  const sampleService = context.getStoresServices().sample;
-  const STATUS = sampleService.getStatus();
-  const result = await sampleService.getList({
-    where: {
-      status: STATUS.valid,
-    }
-  }).catch(err => {
+  const result = await services.sample.getList().catch(err => {
     // TODO send slack AND monitoring
     throw new utils.error(err.name, err.original.code, code.BAD_REQUEST);
   });
