@@ -1,10 +1,4 @@
-FROM centos:centos7
-
-RUN yum install -y gcc-c++ make curl
-RUN yum -y install vim-enhanced nc nmap
-
-RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-RUN yum install -y nodejs
+FROM foway/linux:1.0.0
 
 WORKDIR /usr/src/app
 

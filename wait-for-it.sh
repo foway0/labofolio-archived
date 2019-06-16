@@ -16,4 +16,4 @@ done
 
 # Apply database migrations
 echo "Apply database migrations"
-npm run debug;
+npm run start;
