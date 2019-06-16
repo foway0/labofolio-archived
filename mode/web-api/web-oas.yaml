@@ -1,0 +1,64 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: WEB API
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:3000
+paths:
+  /sample/{id}:
+    get:
+      description: |
+        findOne sample
+        Numeric ID
+      operationId: findSample
+      parameters:
+        - in: path
+          description: Numeric ID of the sample to get
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Sample'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Sample:
+      properties:
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+        text:
+          type: string
+        created:
+          type: string
+        modified:
+          type: string
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

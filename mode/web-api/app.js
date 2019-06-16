@@ -1,3 +1,5 @@
+const OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
+
 const core = require('../../core');
 const routes = require('./routes');
 
@@ -12,6 +14,11 @@ class Service extends core.Application {
   }
 
   async init() {
+    // 1. Install the OpenApiValidator on your express app
+    new OpenApiValidator({
+      apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
+    }).install(this.app);
+
     // load route
     super.loadRoutes(routes);
 
@@ -39,6 +46,10 @@ class Service extends core.Application {
         res.status(err.statusCode).json({
           name: err.name,
           message: err.message,
+        });
+      else if(err.status)
+        res.status(err.status).json({
+          errors: err.errors,
         });
       else
         res.status(code.SERVICE_UNAVAILABLE).end();
