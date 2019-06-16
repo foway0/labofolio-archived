@@ -35,7 +35,7 @@ class Sample extends Sequelize.Model {
       charset: 'utf8',
     };
 
-    return super.init(attributes, options)
+    return super.init(attributes, options);
   }
 
   static getStatus() {
