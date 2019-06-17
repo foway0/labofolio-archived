@@ -7,6 +7,21 @@ info:
 servers:
   - url: http://localhost:3000
 paths:
+  ######################
+  # sample
+  ######################
+  /sample:
+    get:
+      description: |
+        findAll sample
+      operationId: listSample
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleCollection'
   /sample/{id}:
     get:
       description: |
@@ -26,9 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  $ref: '#/components/schemas/Sample'
+                $ref: '#/components/schemas/Sample'
         default:
           description: unexpected error
           content:
@@ -51,6 +64,12 @@ components:
           type: string
         modified:
           type: string
+      type: object
+
+    SampleCollection:
+      items:
+        $ref: '#/components/schemas/Sample'
+      type: array
 
     Error:
       required:

@@ -31,14 +31,6 @@ class Service extends core.Application {
 
       res.status(code.OK).send(result.pong);
     });
-
-    this.app.get('/error', (req, res) => {
-      throw new utils.error('woops', 'TEST', code.BAD_REQUEST);
-    });
-    // 404 not found
-    this.app.get('*', (req, res) => {
-      res.status(code.NOT_FOUND).send('what??? (╯°□°）╯︵ ┻━┻');
-    });
     // TODO custom error handler oas
     this.app.use((err, req, res, next) => {
       // Will get here
