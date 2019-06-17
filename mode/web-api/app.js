@@ -39,6 +39,9 @@ class Service extends core.Application {
           name: err.name,
           message: err.message,
         });
+      // エラー扱いになるよ…
+      else if(err.status && err.status === code.NOT_FOUND)
+        res.status(code.NOT_FOUND).send('what??? (╯°□°）╯︵ ┻━┻');
       else if(err.status)
         res.status(err.status).json({
           errors: err.errors,

@@ -7,6 +7,22 @@ info:
 servers:
   - url: http://localhost:3000
 paths:
+  /ping:
+    get:
+      description: |
+        ping then pong
+      operationId: pingpong
+      responses:
+        '200':
+          description: OK
+        default:
+          description: unexpected error
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
+
   ######################
   # sample
   ######################
