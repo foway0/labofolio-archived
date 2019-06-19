@@ -7,24 +7,28 @@ const utils = context.getUtils();
 
 const router = express.Router();
 
-const doAsync = fn => async (req, res, next) => await fn(req, res, next).catch(next);
+const doAsync = utils.wrapper.doAsync;
 
 router.route('/')
-  .get(doAsync(async (req, res) => {
-    const result = await services.sample.getList().catch(err => {
-      // TODO send slack AND monitoring
-      throw new utils.error(err.name, err.original.code, code.BAD_REQUEST);
-    });
-
-    res.status(code.OK).json(result);
-  }));
+  .get(doAsync(list));
 
 router.route('/:id')
-  .get(doAsync(async (req, res) => {
-    const id = req.params.id;
-    const result = await services.sample.getById(id);
-
-    res.status(code.OK).json(result);
-  }));
+  .get(doAsync(getOne));
 
 module.exports = router;
+
+async function list(req, res) {
+  const result = await services.sample.getList().catch(err => {
+    // TODO send slack AND monitoring
+    throw new utils.error(err.name, err.original.code, code.BAD_REQUEST);
+  });
+
+  res.status(code.OK).json(result);
+}
+
+async function getOne(req, res) {
+  const id = req.params.id;
+  const result = await services.sample.getById(id);
+
+  res.status(code.OK).json(result);
+}
