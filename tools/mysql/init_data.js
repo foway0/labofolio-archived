@@ -29,7 +29,7 @@
       if (data)
         await init_data_fixtures[fixture](sequelize).bulkCreate(data, {transaction: t});
       else
-        notFound.push(`${fixture}'s data is not exists.`)
+        notFound.push(`${fixture}'s data is not exists.`);
     }
     await t.commit();
   } catch (err) {
