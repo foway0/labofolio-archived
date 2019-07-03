@@ -6,7 +6,8 @@ const routes = require('./routes');
 const context = core.context;
 const utils = context.getUtils();
 const code = context.getConst().statusCode;
-
+const {i18next} = context.getMiddlewares();
+const locales = context.getLocales();
 class Service extends core.Application {
 
   constructor(env) {
@@ -14,7 +15,13 @@ class Service extends core.Application {
   }
 
   async init() {
-    // 1. Install the OpenApiValidator on your express app
+    // Install the I18next on your express app
+    this.app.use(i18next('ko', ['ko', 'ja'], {
+      ko: { translation: locales.ko },
+      ja: { translation: locales.ja },
+    }));
+
+    // Install the OpenApiValidator on your express app
     new OpenApiValidator({
       apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
     }).install(this.app);
@@ -22,6 +29,7 @@ class Service extends core.Application {
     // load route
     super.loadRoutes(routes);
 
+    // TODO health Check
     this.app.get('/ping', async (req, res) => {
       const sequelize = context.getStoresMysql();
       const result = await sequelize.query("SELECT 'pong'", {

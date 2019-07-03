@@ -3,6 +3,8 @@ const Sequelize = require('sequelize');
 const shared = require('../shared');
 const utils  = require('../utils');
 const models = require('../tools/mysql/models');
+const locales = require('../tools/locales');
+const middlewares = require('../middlewares');
 
 class Context {
   constructor() {
@@ -15,6 +17,8 @@ class Context {
     this.stores.mysql = null;
     this.stores.service = {};
     this.services = null;
+    this.middlewares = middlewares;
+    this.locales = locales;
   }
 
   async initStores() {
@@ -67,6 +71,14 @@ class Context {
 
   getUtils() {
     return this.utils;
+  }
+
+  getMiddlewares() {
+    return this.middlewares;
+  }
+
+  getLocales() {
+    return this.locales;
   }
 }
 

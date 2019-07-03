@@ -40,16 +40,12 @@
 
 ## TODO
 
-- [ ] replica ?
-- [ ] nginx proxy server
 - [x] async init function ?
 - [x] sample ddl
-- [ ] oas3
+- [x] oas3
+- [x] init data
 - [ ] mocha
+- [x] i18next
 - [ ] log
-- [ ] i18next
-- [ ] init data
-- [ ] basic auth
-- [ ] migration tools
 - [ ] http header
-- [ ] socket io
+- [ ] monitoring
