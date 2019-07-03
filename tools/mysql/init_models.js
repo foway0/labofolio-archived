@@ -4,14 +4,15 @@
   await context.initStores();
 
   const sequelize = context.getStoresMysql();
+  const models = context.getModels();
   const fixtures = [
-    require('./models').sample
+    models.sample
   ];
 
   for(const fixture of fixtures) {
     await fixture(sequelize).sync();
   }
-
+  process.exit(0);
 })().catch(err => {
   console.log(err);
   process.exit(1);

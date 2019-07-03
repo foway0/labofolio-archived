@@ -3,6 +3,7 @@
   const environment = context.getEnv();
 
   await context.initStores();
+  context.initServices();
 
   let server;
   switch (environment.SERVICE_MODE) {

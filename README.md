@@ -9,11 +9,6 @@
         - prd
     - constant
     - environment
-    - locale
-        - ko
-        - en
-        - ja
-        - etc
     - services
 - core
     - middleware
@@ -29,11 +24,16 @@
     - web
         - routes
 - tools
+    - locale
+        - ko
+        - en
+        - ja
+        - etc
     - test
     - mysql [sequelize base]
         - models
-    - init_models
-    - init_data
+        - init_models
+        - init_data
 - utils
     - error handler
     - parser

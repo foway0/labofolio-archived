@@ -30,6 +30,9 @@ class Context {
       .catch(err => {
         console.error('Unable to connect to the database:', err);
       });
+  }
+
+  initServices() {
     const models = this.getModels();
     for(const rec in models) {
       console.log('=======================');
