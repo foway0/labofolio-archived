@@ -1,6 +1,7 @@
 module.exports = env => {
   const config = {};
   config.stores = stores(env);
+  config[env.SERVICE_MODE] = service(env)[env.SERVICE_MODE];
 
   return Object.freeze(config);
 };
@@ -22,6 +23,18 @@ const stores = env => {
           { host: env.MYSQL_HOST, username: 'foway', password: 'qwerty' },
         ],
         write: { host: env.MYSQL_HOST, username: 'foway', password: 'qwerty' }
+      }
+    }
+  };
+};
+
+const service = env => { // eslint-disable-line no-unused-vars
+  return {
+    'web-api': {
+      cors: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
       }
     }
   };

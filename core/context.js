@@ -68,6 +68,10 @@ class Context {
     return this.stores.service;
   }
 
+  getConfig() {
+    return this.config[this.environment.SERVICE_MODE];
+  }
+
   getConfigStoresMysql() {
     return this.config.stores.mysql;
   }

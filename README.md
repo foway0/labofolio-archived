@@ -1,5 +1,9 @@
 # labofolio
 
+## features
+
+- 나만 이해하게 적음.. ㅇㅇ
+
 ## tree & architecture
 
 - index.js
@@ -47,5 +51,14 @@
 - [ ] mocha
 - [x] i18next
 - [ ] log
-- [ ] http header
+- [x] http header
 - [ ] monitoring
+- [ ] versioning
+
+## NEXT Mission
+
+- [ ] lodash
+- [ ] mout
+- [ ] utils single package
+- [ ] core single package
+- [ ] fix architecture
