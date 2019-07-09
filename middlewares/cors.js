@@ -24,5 +24,5 @@ module.exports = headers => {
 // TODO white_list + custom wl
 
 const objectChecker = obj => {
-  return obj.constructor === Object && !Object.keys(obj).length;
+  return obj.constructor === Object && Object.keys(obj).length;
 };
