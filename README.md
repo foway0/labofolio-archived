@@ -54,6 +54,7 @@
 - [x] http header
 - [ ] monitoring
 - [ ] versioning
+- [ ] last refactoring before [NEXT Mission]
 
 ## NEXT Mission
 

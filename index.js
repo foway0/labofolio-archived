@@ -4,6 +4,7 @@
 
   await context.initStores();
   context.initServices();
+  context.initBugsnag();
 
   let server;
   switch (environment.SERVICE_MODE) {

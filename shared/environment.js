@@ -6,6 +6,7 @@ const environment = {
   MYSQL_PORT: process.env.MYSQL_PORT,
   SSL_CERT: process.env.SSL_CERT,
   SSL_KEY: process.env.SSL_KEY,
+  BUGSNAG_API_KEY: process.env.BUGSNAG_API_KEY,
 };
 
 module.exports = Object.freeze(environment);

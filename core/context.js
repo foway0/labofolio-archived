@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const bugsnag = require('@bugsnag/js');
+const bugsnagExpress = require('@bugsnag/plugin-express');
 
 const shared = require('../shared');
 const utils  = require('../utils');
@@ -6,6 +8,8 @@ const models = require('../tools/mysql/models');
 const locales = require('../tools/locales');
 const middlewares = require('../middlewares');
 
+// TODO 이름 개판이니 고치기
+// TODO setter로 로딩해서 constructor에서 사용하도록 설정하기!
 class Context {
   constructor() {
     this.environment = shared.environment;
@@ -19,6 +23,7 @@ class Context {
     this.services = null;
     this.middlewares = middlewares;
     this.locales = locales;
+    this.bugsnag = null;
   }
 
   async initStores() {
@@ -32,6 +37,21 @@ class Context {
       });
   }
 
+  initBugsnag() {
+    const bugsnagClient = bugsnag({
+      apiKey: this.environment.BUGSNAG_API_KEY,
+      releaseStage: this.environment.SERVICE_ENV,
+      metaData: {
+        app: {
+          mode: this.environment.SERVICE_MODE,
+        }
+      }
+    });
+    bugsnagClient.use(bugsnagExpress);
+
+    this.bugsnag = bugsnagClient.getPlugin('express');
+  }
+
   initServices() {
     const models = this.getModels();
     for(const rec in models) {
@@ -42,6 +62,10 @@ class Context {
     }
     // load
     this.services = require('../services');
+  }
+
+  getBugsnag() {
+    return this.bugsnag;
   }
 
   getServices() {

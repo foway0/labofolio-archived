@@ -3,7 +3,7 @@ const http = require('http');
 const https = require('https');
 // TODO utils ?
 const sprintf = require('sprintf-js').sprintf;
-
+// TODO 잘 생각해서 공통 기능 부분을 추가하자
 class Application {
   constructor(env) {
     this.app = express();

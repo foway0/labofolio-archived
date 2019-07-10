@@ -9,6 +9,7 @@ const code = context.getConst().statusCode;
 const {i18next, cors} = context.getMiddlewares();
 const locales = context.getLocales();
 const config = context.getConfig();
+const bugsnag = context.getBugsnag();
 class Service extends core.Application {
 
   constructor(env) {
@@ -22,7 +23,9 @@ class Service extends core.Application {
       ko: { translation: locales.ko },
       ja: { translation: locales.ja },
     }));
+    this.app.use(bugsnag.requestHandler);
 
+    // TODO context
     // Install the OpenApiValidator on your express app
     new OpenApiValidator({
       apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
@@ -42,6 +45,7 @@ class Service extends core.Application {
       res.status(code.OK).send(result.pong);
     });
     // TODO custom error handler oas
+    this.app.use(bugsnag.errorHandler);
     this.app.use((err, req, res, next) => {
       // Will get here
       if(err.statusCode)
