@@ -17,6 +17,7 @@ class Service extends core.Application {
   }
 
   async init() {
+    utils.log4js.init(context.getConfigLog4js());
     this.app.use(cors(config.cors));
     // Install the I18next on your express app
     this.app.use(i18next('ko', ['ko', 'ja'], {

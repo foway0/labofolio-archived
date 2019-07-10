@@ -22,6 +22,7 @@ async function list(req, res) {
     // TODO send slack AND monitoring
     throw new utils.error(err.name, err.original.code, code.BAD_REQUEST);
   });
+  utils.log4js.info('json', result);
 
   res.status(code.OK).json(result);
 }
@@ -29,6 +30,7 @@ async function list(req, res) {
 async function getOne(req, res) {
   const id = req.params.id;
   const result = await services.sample.getById(id);
+  utils.log4js.info('json', result);
 
   res.status(code.OK).json(result);
 }

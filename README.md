@@ -50,9 +50,9 @@
 - [x] init data
 - [ ] mocha
 - [x] i18next
-- [ ] log
+- [x] log
 - [x] http header
-- [ ] monitoring
+- [x] monitoring
 - [ ] versioning
 - [ ] last refactoring before [NEXT Mission]
 
