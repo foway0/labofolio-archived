@@ -17,8 +17,6 @@ const stores = env => {
       retry: {
         max: 3,
       },
-      // TODO : replica ???
-      // TODO : username password
       replication: {
         read: [
           { host: env.MYSQL_HOST, username: 'foway', password: 'qwerty' },

@@ -3,7 +3,7 @@ const bugsnag = require('@bugsnag/js');
 const bugsnagExpress = require('@bugsnag/plugin-express');
 
 const shared = require('../shared');
-const utils  = require('../utils');
+const utils  = require('./utils');
 const models = require('../tools/mysql/models');
 const locales = require('../tools/locales');
 const middlewares = require('../middlewares');

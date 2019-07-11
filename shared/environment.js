@@ -1,12 +1,15 @@
-const environment = {
+module.exports = Object.freeze({
   SERVICE_ENV: process.env.SERVICE_ENV || 'local',
   SERVICE_PORT: process.env.SERVICE_PORT,
   SERVICE_MODE: process.env.SERVICE_MODE,
   MYSQL_HOST: process.env.MYSQL_HOST,
   MYSQL_PORT: process.env.MYSQL_PORT,
+  MYSQL_ROOT_USER: process.env.MYSQL_ROOT_USER,
+  MYSQL_ROOT_PASSWORD: process.env.MYSQL_ROOT_PASSWORD,
+  MYSQL_USER: process.env.MYSQL_USER,
+  MYSQL_PASSWORD: process.env.MYSQL_PASSWORD,
+  MYSQL_DATABASE: process.env.MYSQL_DATABASE,
   SSL_CERT: process.env.SSL_CERT,
   SSL_KEY: process.env.SSL_KEY,
   BUGSNAG_API_KEY: process.env.BUGSNAG_API_KEY,
-};
-
-module.exports = Object.freeze(environment);
+});

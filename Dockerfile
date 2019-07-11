@@ -7,7 +7,6 @@ ADD index.js /usr/src/app/
 ADD package*.json /usr/src/app/
 ADD wait-for-it.sh /usr/src/app/
 ADD shared /usr/src/app/shared/
-ADD utils /usr/src/app/utils/
 ADD core /usr/src/app/core/
 ADD mode /usr/src/app/mode/
 ADD tools /usr/src/app/tools/
