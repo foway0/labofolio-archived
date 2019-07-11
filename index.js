@@ -1,17 +1,16 @@
 (async () => {
   const {context} = require('./core');
-  const environment = context.getEnv();
 
   await context.initStores();
   context.initServices();
   context.initBugsnag();
 
   let server;
-  switch (environment.SERVICE_MODE) {
+  switch (context.environment.SERVICE_MODE) {
     case 'web-api':
-      server = require('./mode/web-api/app')(environment);
+      server = require('./mode/web-api/app')(context);
       await server.init();
-      return server.start(environment);
+      return server.start();
     default:
       throw Error('server mode ERROR!');
   }

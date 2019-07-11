@@ -3,8 +3,8 @@
 
   await context.initStores();
 
-  const sequelize = context.getStoresMysql();
-  const models = context.getModels();
+  const sequelize = context.getMysqlConnect();
+  const models = context.models;
   const fixtures = [
     models.sample
   ];

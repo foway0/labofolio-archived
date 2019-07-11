@@ -25,7 +25,7 @@ class Context {
   }
 
   async initStores() {
-    this.stores.mysql = new Sequelize(this.getConfigStoresMysql());
+    this.stores.mysql = new Sequelize(this.config.stores.mysql);
     await this.stores.mysql.authenticate()
       .then(() => {
         this.logger.info('out', 'Connection has been established successfully.');
@@ -52,39 +52,20 @@ class Context {
     this.bugsnag = bugsnagClient.getPlugin('express');
   }
 
+  // TODO set init
   initServices() {
-    const models = this.getModels();
+    const models = this.models;
     this.logger.info('line','=======================');
     for(const rec in models) {
       this.logger.info('line', `init: ${[rec]}`);
-      this.stores.service[rec] = models[rec](this.getStoresMysql());
+      this.stores.service[rec] = models[rec](this.stores.mysql);
     }
     this.logger.info('line', '=======================');
     // load
     this.services = require('../services');
   }
 
-  getBugsnag() {
-    return this.bugsnag;
-  }
-
-  getServices() {
-    return this.services;
-  }
-
-  getEnv() {
-    return this.environment;
-  }
-
-  getConst() {
-    return this.constant;
-  }
-
-  getModels() {
-    return this.models;
-  }
-
-  getStoresMysql() {
+  getMysqlConnect() {
     return this.stores.mysql;
   }
 
@@ -94,22 +75,6 @@ class Context {
 
   getConfig() {
     return this.config[this.environment.SERVICE_MODE];
-  }
-
-  getConfigStoresMysql() {
-    return this.config.stores.mysql;
-  }
-
-  getUtils() {
-    return this.utils;
-  }
-
-  getMiddleware() {
-    return this.middleware;
-  }
-
-  getLocales() {
-    return this.locales;
   }
 }
 

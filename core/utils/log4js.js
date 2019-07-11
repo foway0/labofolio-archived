@@ -99,6 +99,11 @@ class Log4js {
     logger.trace(msg);
   }
 
+  static debug(mode, ...msg) {
+    const logger = log4js.getLogger(mode);
+    logger.debug(msg);
+  }
+
   static info(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.info(msg);

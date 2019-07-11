@@ -4,16 +4,15 @@ const core = require('../../core');
 const routes = require('./routes');
 
 const context = core.context;
-const utils = context.getUtils();
-const code = context.getConst().statusCode;
-const {i18next, cors} = context.getMiddleware();
-const locales = context.getLocales();
+const {utils, middleware, locales, bugsnag} = context;
+const code = context.constant.statusCode;
+const {i18next, cors} = middleware;
 const config = context.getConfig();
-const bugsnag = context.getBugsnag();
+
 class Service extends core.Application {
 
-  constructor(env) {
-    super(env);
+  constructor(ctx) {
+    super(ctx);
   }
 
   async init() {
@@ -36,7 +35,7 @@ class Service extends core.Application {
 
     // TODO health Check
     this.app.get('/ping', async (req, res) => {
-      const sequelize = context.getStoresMysql();
+      const sequelize = context.getMysqlConnect();
       const result = await sequelize.query("SELECT 'pong'", {
         type: sequelize.QueryTypes.SELECT,
         plain: true

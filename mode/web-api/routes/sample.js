@@ -1,9 +1,8 @@
 const express = require('express');
 
 const {context} = require('../../../core');
-const services = context.getServices();
-const code = context.getConst().statusCode;
-const utils = context.getUtils();
+const {services, utils, constant} = context;
+const code = constant.statusCode;
 
 const router = express.Router();
 
