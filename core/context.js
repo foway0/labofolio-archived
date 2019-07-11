@@ -6,7 +6,7 @@ const shared = require('../shared');
 const utils  = require('./utils');
 const models = require('../tools/mysql/models');
 const locales = require('../tools/locales');
-const middlewares = require('../middlewares');
+const middleware = require('../middleware');
 
 // TODO 이름 개판이니 고치기
 // TODO setter로 로딩해서 constructor에서 사용하도록 설정하기!
@@ -16,24 +16,22 @@ class Context {
     this.constant = shared.constant;
     this.config = shared.config;
     this.utils = utils;
+    this.logger = this.utils.log4js;
     this.models = models;
-    this.stores = {};
-    this.stores.mysql = null;
-    this.stores.service = {};
-    this.services = null;
-    this.middlewares = middlewares;
+    this.middleware = middleware;
     this.locales = locales;
-    this.bugsnag = null;
+    this.stores = {};
+    this.stores.service = {};
   }
 
   async initStores() {
     this.stores.mysql = new Sequelize(this.getConfigStoresMysql());
     await this.stores.mysql.authenticate()
       .then(() => {
-        console.log('Connection has been established successfully.');
+        this.logger.info('out', 'Connection has been established successfully.');
       })
       .catch(err => {
-        console.error('Unable to connect to the database:', err);
+        this.logger.error('json', 'Unable to connect to the database:', err);
       });
   }
 
@@ -56,12 +54,12 @@ class Context {
 
   initServices() {
     const models = this.getModels();
+    this.logger.info('line','=======================');
     for(const rec in models) {
-      console.log('=======================');
-      console.log(`init: ${[rec]}`);
+      this.logger.info('line', `init: ${[rec]}`);
       this.stores.service[rec] = models[rec](this.getStoresMysql());
-      console.log('=======================');
     }
+    this.logger.info('line', '=======================');
     // load
     this.services = require('../services');
   }
@@ -102,16 +100,12 @@ class Context {
     return this.config.stores.mysql;
   }
 
-  getConfigLog4js() {
-    return this.config.log4js;
-  }
-
   getUtils() {
     return this.utils;
   }
 
-  getMiddlewares() {
-    return this.middlewares;
+  getMiddleware() {
+    return this.middleware;
   }
 
   getLocales() {

@@ -11,7 +11,7 @@ ADD core /usr/src/app/core/
 ADD mode /usr/src/app/mode/
 ADD tools /usr/src/app/tools/
 ADD services /usr/src/app/services/
-ADD middlewares /usr/src/app/middlewares/
+ADD middleware /usr/src/app/middleware/
 
 RUN chmod +x /usr/src/app/wait-for-it.sh
 RUN npm cache verify && npm install --no-progress

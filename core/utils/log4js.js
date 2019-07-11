@@ -1,5 +1,56 @@
 const log4js = require('log4js');
 
+log4js.addLayout('line', () => {
+  return logEvent => {
+    return colorize(`[${logEvent.level.levelStr}][PID:${logEvent.pid}]${logEvent.data}`, logEvent.level.colour);
+  }
+});
+log4js.addLayout('json', config => {
+  return logEvent => {
+    const a = {};
+    if(logEvent.level.levelStr === 'error')
+      a.error = logEvent.data[0];
+    else
+      a.data = logEvent.data[0];
+
+    return colorize(`[${logEvent.level.levelStr}][PID:${logEvent.pid}]${logEvent.startTime}:${JSON.stringify(a) + config.separator}`, logEvent.level.colour);
+  }
+});
+log4js.configure({
+  appenders: {
+    out: {
+      type: 'stdout',
+      layout: {type: 'coloured'}
+    },
+    line: {
+      type: 'stdout',
+      layout: {
+        type: 'line',
+      }
+    },
+    json: {
+      type: 'stdout',
+      layout: {
+        type: 'json',
+        separator: ',',
+      }
+    }
+  },
+  categories: {
+    default: {
+      appenders: ['out'],
+      level: 'all',
+    },
+    line: {
+      appenders: ['line'],
+      level: 'all',
+    },
+    json: {
+      appenders: ['json'],
+      level: 'all',
+    },
+  }
+});
 // TODO set custom color
 const styles = {
   // styles
@@ -36,26 +87,14 @@ function colorizeEnd(style) {
 function colorize(str, style) {
   return colorizeStart(style) + str + colorizeEnd(style);
 }
-log4js.addLayout('json', config => {
-  return logEvent => {
-    const a = {};
-    a.data = logEvent.data[0];
-    console.log(logEvent);
-    return colorize(`[PID:${logEvent.pid}]${logEvent.startTime}:${JSON.stringify(a) + config.separator}`, randomProperty(styles));
-  }
-});
 
 class Log4js {
-  static init(config) {
-    log4js.configure(config);
-  }
-
-  static all(mode, msg) {
+  static all(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.info(msg);
   }
 
-  static trace(mode, msg) {
+  static trace(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.trace(msg);
   }
@@ -65,12 +104,12 @@ class Log4js {
     logger.info(msg);
   }
 
-  static warn(mode, msg) {
+  static warn(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.warn(msg);
   }
 
-  static error(mode, msg) {
+  static error(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.error(msg);
   }

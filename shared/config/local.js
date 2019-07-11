@@ -2,7 +2,6 @@ module.exports = env => {
   const config = {};
   config.stores = stores(env);
   config[env.SERVICE_MODE] = service(env)[env.SERVICE_MODE];
-  config.log4js = log4js(env);
 
   return Object.freeze(config);
 };
@@ -37,45 +36,4 @@ const service = env => { // eslint-disable-line no-unused-vars
       }
     }
   };
-};
-
-const log4js = env => { // eslint-disable-line no-unused-vars
-  return {
-    appenders: {
-      out: {
-        type: 'stdout',
-        layout: {
-          type: 'coloured'
-        }
-      },
-      pattern: {
-        type: 'stdout',
-        layout: {
-          type: 'pattern',
-          pattern: '[%d][%p][%c] %h - %m'
-        }
-      },
-      json: {
-        type: 'stdout',
-        layout: {
-          type: 'json',
-          separator: ',',
-        }
-      }
-    },
-    categories: {
-      default: {
-        appenders: ['out'],
-        level: 'all'
-      },
-      pattern: {
-        appenders: ['pattern'],
-        level: 'all'
-      },
-      json: {
-        appenders: ['json'],
-        level: 'all'
-      },
-    }
-  }
 };

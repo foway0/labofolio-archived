@@ -6,7 +6,7 @@ const routes = require('./routes');
 const context = core.context;
 const utils = context.getUtils();
 const code = context.getConst().statusCode;
-const {i18next, cors} = context.getMiddlewares();
+const {i18next, cors} = context.getMiddleware();
 const locales = context.getLocales();
 const config = context.getConfig();
 const bugsnag = context.getBugsnag();
@@ -17,7 +17,6 @@ class Service extends core.Application {
   }
 
   async init() {
-    utils.log4js.init(context.getConfigLog4js());
     this.app.use(cors(config.cors));
     // Install the I18next on your express app
     this.app.use(i18next('ko', ['ko', 'ja'], {

@@ -1,5 +1,6 @@
 module.exports = Object.freeze({
   SERVICE_ENV: process.env.SERVICE_ENV || 'local',
+  SERVICE_HOST: process.env.SERVICE_HOST || 'localhost',
   SERVICE_PORT: process.env.SERVICE_PORT,
   SERVICE_MODE: process.env.SERVICE_MODE,
   MYSQL_HOST: process.env.MYSQL_HOST,
