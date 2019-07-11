@@ -22,9 +22,8 @@ class Service extends core.Application {
       ko: { translation: locales.ko },
       ja: { translation: locales.ja },
     }));
+    // Install the bugsnag on your express app
     this.app.use(bugsnag.requestHandler);
-
-    // TODO context
     // Install the OpenApiValidator on your express app
     new OpenApiValidator({
       apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
@@ -43,7 +42,8 @@ class Service extends core.Application {
 
       res.status(code.OK).send(result.pong);
     });
-    // TODO custom error handler oas
+
+    // error handler
     this.app.use(bugsnag.errorHandler);
     this.app.use((err, req, res, next) => {
       // Will get here

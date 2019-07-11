@@ -3,7 +3,7 @@ const log4js = require('log4js');
 log4js.addLayout('line', () => {
   return logEvent => {
     return colorize(`[${logEvent.level.levelStr}][PID:${logEvent.pid}]${logEvent.data}`, logEvent.level.colour);
-  }
+  };
 });
 log4js.addLayout('json', config => {
   return logEvent => {
@@ -14,7 +14,7 @@ log4js.addLayout('json', config => {
       a.data = logEvent.data[0];
 
     return colorize(`[${logEvent.level.levelStr}][PID:${logEvent.pid}]${logEvent.startTime}:${JSON.stringify(a) + config.separator}`, logEvent.level.colour);
-  }
+  };
 });
 log4js.configure({
   appenders: {
@@ -69,11 +69,6 @@ const styles = {
   magenta: [35, 39],
   red: [91, 39],
   yellow: [33, 39]
-};
-
-const randomProperty = function (obj) {
-  const keys = Object.keys(obj);
-  return keys[keys.length * Math.random() << 0];
 };
 
 function colorizeStart(style) {

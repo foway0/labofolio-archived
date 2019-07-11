@@ -10,6 +10,11 @@
       break;
   }
   const {context} = require('../../core');
+  const shared = require('../../shared');
+  context.setParams('environment', shared.environment);
+  context.setParams('constant', shared.constant);
+  context.setParams('config', shared.config);
+  context.setParams('models', require('./models'));
 
   await context.initStores();
 
