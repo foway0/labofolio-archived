@@ -114,7 +114,7 @@ class Log4js {
     logger.error(msg);
   }
 
-  static fatal(mode, msg) {
+  static fatal(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.fatal(msg);
   }

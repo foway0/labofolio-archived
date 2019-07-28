@@ -1,6 +1,5 @@
 const {describe, it} = require("mocha");
-const should = require('chai').should();
-const expect = require('chai').expect;
+const {expect} = require('chai');
 
 const parser = require('../../../../core/utils/parser');
 describe('core/utils/parser', () => {
