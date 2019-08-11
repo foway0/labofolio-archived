@@ -1,4 +1,4 @@
-const {describe, it} = require("mocha");
+const {describe, it} = require('mocha');
 const {expect} = require('chai');
 
 const parser = require('../../../../core/utils/parser');
@@ -25,7 +25,7 @@ describe('core/utils/parser', () => {
           name: 'MIT'
         }
       });
-    })
+    });
   });
 
   describe('pathJoin', () => {

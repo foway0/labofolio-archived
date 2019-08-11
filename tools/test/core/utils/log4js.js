@@ -1,5 +1,5 @@
 const {describe, it} = require('mocha');
-const {expect, should} = require('chai');
+const {expect} = require('chai');
 
 const log4js = require('../../../../core/utils/log4js');
 describe('core/utils/log4js', () => {
@@ -16,6 +16,6 @@ describe('core/utils/log4js', () => {
       log4js.warn('out', 'UT');
       log4js.error('out', 'UT');
       log4js.fatal('out', 'UT');
-    })
+    });
   });
 });
