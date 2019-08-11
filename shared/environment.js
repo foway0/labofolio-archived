@@ -13,4 +13,6 @@ module.exports = Object.freeze({
   SSL_CERT: process.env.SSL_CERT,
   SSL_KEY: process.env.SSL_KEY,
   BUGSNAG_API_KEY: process.env.BUGSNAG_API_KEY,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 });
