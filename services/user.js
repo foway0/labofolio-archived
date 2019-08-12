@@ -2,10 +2,10 @@ const {context} = require('../core');
 const user = context.getStoresServices().user;
 
 module.exports = {
-  findOrCreate: (uuid, opts) => {
+  findOrCreate: (sid, opts) => {
     return user.findOrCreate({
       where: {
-        uuid: uuid
+        strategy_id: sid,
       },
       defaults: opts,
     });

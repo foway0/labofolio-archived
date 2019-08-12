@@ -19,6 +19,10 @@ class User extends Sequelize.Model {
         primaryKey: true,
         autoIncrement: true,
       },
+      strategy_id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       uuid: {
         type: Sequelize.STRING,
         allowNull: false,

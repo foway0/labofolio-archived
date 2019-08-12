@@ -68,6 +68,18 @@ paths:
   ######################
   # login google
   ######################
+  /auth/google:
+    get:
+      description: |
+        google oauth
+      operationId: authGoogle
+      responses:
+        '200':
+          description: login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oauth'
   /auth/google/callback:
     get:
       description: |
