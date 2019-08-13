@@ -74,12 +74,8 @@ paths:
         google oauth
       operationId: authGoogle
       responses:
-        '200':
-          description: login
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/oauth'
+        '302':
+          description: Moved Permanently
   /auth/google/callback:
     get:
       description: |

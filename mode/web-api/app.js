@@ -16,7 +16,9 @@ class Service extends core.Application {
   }
 
   async init() {
-    this.app.use(cors(config.cors));
+    this.app.set('views', utils.parser.pathJoin(__dirname, 'views'));
+    this.app.set('view engine', 'pug');
+    //this.app.use(cors(config.cors));
     // Install the I18next on your express app
     this.app.use(i18next('ko', ['ko', 'ja'], {
       ko: { translation: locales.ko },
@@ -66,9 +68,9 @@ class Service extends core.Application {
         res.status(err.status).json({
           errors: err.errors,
         });
-      else
+      else {
         res.status(code.SERVICE_UNAVAILABLE).end();
-
+      }
     });
   }
 }

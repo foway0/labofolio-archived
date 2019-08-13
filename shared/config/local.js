@@ -37,6 +37,7 @@ const service = env => { // eslint-disable-line no-unused-vars
       oauth: {
         callbackURL: 'http://localhost/auth/google/callback'
       },
+      expire: 60 * 24,
     }
   };
 };
