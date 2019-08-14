@@ -2,10 +2,8 @@ const express = require('express');
 const moment = require('moment');
 require('moment-timezone');
 
-const uuid = require('uuid');
-
 const {context} = require('../../../core');
-const {services, utils} = context;
+const {services, utils, environment} = context;
 const config = context.getConfig();
 
 const router = express.Router();
@@ -23,7 +21,6 @@ async function callback(req, res) {
   const info = req.user.profile._json;
   const opts = {
     strategy_id: info.sub,
-    uuid: uuid(),
     nickname: info.name,
     profile_url: info.picture,
     locale: info.locale,
@@ -32,11 +29,10 @@ async function callback(req, res) {
   };
   const result = await services.user.findOrCreate(info.sub, opts);
 
-  const key = result[0].strategy_id;
-  const iv  = result[0].uuid;
-  const expire = moment().tz('Asia/Tokyo').add(config.expire, 'minutes').format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
-  const text = `${result[0].strategy_id}_${expire}`;
-  const token = utils.crypto.encrypt(text, key, iv);
+  const data = {
+    strategy_id: result[0].strategy_id
+  };
+  const token = utils.crypto.generateToken(data, environment.JWT_SECRET, config.token_expire);
 
   res.status(200).render('auth.pug', {token: token});
 }

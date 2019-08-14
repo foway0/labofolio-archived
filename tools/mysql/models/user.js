@@ -23,10 +23,6 @@ class User extends Sequelize.Model {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      uuid: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       status: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
@@ -65,6 +61,9 @@ class User extends Sequelize.Model {
       createdAt: 'created',
       updatedAt: 'modified',
       charset: 'utf8',
+      indexes: [
+        {unique: true, fields: ['strategy_id']},
+      ],
     };
 
     return super.init(attributes, options);
