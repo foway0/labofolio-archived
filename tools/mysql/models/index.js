@@ -1,4 +1,6 @@
 module.exports = {
   sample: require('./sample'),
-  user: require('./user'),
+  users: require('./users'),
+  blog: require('./blogs'),
+  // TODO 일단 blogs 만
 };

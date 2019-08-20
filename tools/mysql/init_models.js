@@ -12,7 +12,8 @@
   const models = context.models;
   const fixtures = [
     models.sample,
-    models.user,
+    models.users,
+    models.blog,
   ];
 
   for(const fixture of fixtures) {

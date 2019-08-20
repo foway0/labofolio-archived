@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const TABLE_NAME = 'user';
+const TABLE_NAME = 'users';
 const STATUS = {
   valid: 1, // 有効
   invalid: 2, // 無効
@@ -10,7 +10,7 @@ const ROLE_ID = {
   admin: 999,
 };
 
-class User extends Sequelize.Model {
+class Users extends Sequelize.Model {
   static init(sequelize) {
     const attributes = {
       id: {
@@ -24,7 +24,7 @@ class User extends Sequelize.Model {
         allowNull: false,
       },
       status: {
-        type: Sequelize.INTEGER.UNSIGNED,
+        type: Sequelize.TINYINT,
         allowNull: false,
         defaultValue: STATUS.valid,
       },
@@ -57,6 +57,7 @@ class User extends Sequelize.Model {
     const options = {
       sequelize,
       modelName: TABLE_NAME,
+      freezeTableName: true,
       timestamp: true,
       createdAt: 'created',
       updatedAt: 'modified',
@@ -70,7 +71,7 @@ class User extends Sequelize.Model {
   }
 }
 module.exports = sequelize => {
-  User.init(sequelize);
+  Users.init(sequelize);
 
-  return User;
+  return Users;
 };
