@@ -88,6 +88,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/oauth'
+
+  /blog:
+    post:
+      description: |
+        blog post
+      operationId: blogPost
+      responses:
+        '204':
+          description: No Content
 components:
   schemas:
     Sample:

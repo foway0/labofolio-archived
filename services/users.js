@@ -9,5 +9,14 @@ module.exports = {
       },
       defaults: opts,
     });
+  },
+  findOne: (sid) => {
+    console.log(context.getStoresServices());
+    const options = {
+      where: {
+        strategy_id: sid,
+      },
+    };
+    return users.findOne(options);
   }
 };

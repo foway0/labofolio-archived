@@ -62,13 +62,13 @@ class Service extends core.Application {
           message: err.message,
         });
       // エラー扱いになるよ…
-      else if(err.status && err.status === code.NOT_FOUND)
+      else if(err.status && err.status === code.NOT_FOUND) {
         res.status(code.NOT_FOUND).send('what??? (╯°□°）╯︵ ┻━┻');
-      else if(err.status)
+      } else if(err.status) {
         res.status(err.status).json({
           errors: err.errors,
         });
-      else {
+      } else {
         res.status(code.SERVICE_UNAVAILABLE).end();
       }
     });

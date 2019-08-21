@@ -1,3 +1,5 @@
+const {context} = require('../core');
+const {services, utils, environment, constant} = context;
 /**
  *
  * @param headers {Object}
@@ -6,7 +8,7 @@
 module.exports = headers => {
   return (req, res, next) => {
 
-    if(objectChecker(headers)) {
+    if(utils.is.objectEmptyChecker(headers)) {
       // custom options
       for(const header in headers) {
 
@@ -20,9 +22,4 @@ module.exports = headers => {
     }
     next();
   };
-};
-// TODO white_list + custom wl
-
-const objectChecker = obj => {
-  return obj.constructor === Object && Object.keys(obj).length;
 };
