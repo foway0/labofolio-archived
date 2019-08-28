@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize');
 
-const TABLE_NAME = 'sample';
+const TABLE_NAME = 'blog_category';
 const STATUS = {
-  valid: 1,   // 有効
-  invalid: 2, // 無効
+  valid: 1,
+  invalid: 2,
+  private: 3,
 };
 
-// FIXME CHECK DEFINE DATA TYPES
-class Sample extends Sequelize.Model {
+class BlogCategory extends Sequelize.Model {
   static init(sequelize) {
     const attributes = {
       id: {
@@ -16,36 +16,40 @@ class Sample extends Sequelize.Model {
         primaryKey: true,
         autoIncrement: true,
       },
+      parent_id: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: true,
+        comment: 'this is for recursive category',
+      },
       status: {
         type: Sequelize.TINYINT,
         allowNull: false,
-        defaultValue: STATUS.valid,
+        defaultValue: STATUS.valid
       },
-      text: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
-      }
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      sort_num: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+      },
     };
     const options = {
       sequelize,
       modelName: TABLE_NAME,
       freezeTableName: true,
-      timestamps: true,
+      timestamp: true,
       createdAt: 'created',
-      updatedAt: 'modified',
+      updatedAt: false,
       charset: 'utf8',
     };
 
     return super.init(attributes, options);
   }
-
-  static getStatus() {
-    return STATUS;
-  }
 }
-
 module.exports = sequelize => {
-  Sample.init(sequelize);
+  BlogCategory.init(sequelize);
 
-  return Sample;
+  return BlogCategory;
 };

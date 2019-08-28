@@ -4,7 +4,7 @@ const wrapper = require('./wrapper');
 const log4js = require('./log4js');
 const is = require('./type_checker');
 const oauth = require('./oauth');
-const crypto = require('./crypto');
+const jwt = require('./jwt');
 
 module.exports = {
   error,
@@ -13,5 +13,5 @@ module.exports = {
   log4js,
   is,
   oauth,
-  crypto,
+  jwt,
 };

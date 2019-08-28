@@ -27,12 +27,12 @@ async function callback(req, res) {
     user_agent: req.user.ua,
     last_access: moment().tz('Asia/Tokyo'),
   };
-  const result = await services.user.findOrCreate(info.sub, opts);
+  const result = await services.users.findOrCreate(info.sub, opts);
 
   const data = {
     strategy_id: result[0].strategy_id
   };
-  const token = utils.crypto.generateToken(data, environment.JWT_SECRET, config.token_expire);
+  const token = utils.jwt.generateToken(data, environment.JWT_SECRET, config.token_expire);
 
   res.status(200).render('auth.pug', {token: token});
 }

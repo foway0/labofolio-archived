@@ -6,9 +6,10 @@
   context.setParams('config', shared.config);
   context.setParams('models', require('./tools/mysql/models'));
   context.setParams('locales', require('./tools/locales'));
-  context.setParams('middleware', require('./middleware'));
 
   await context.init();
+  // ロード問題
+  context.setParams('middleware', require('./middleware'));
 
   let server;
   switch (context.environment.SERVICE_MODE) {
