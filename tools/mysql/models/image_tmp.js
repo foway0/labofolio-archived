@@ -1,13 +1,8 @@
 const Sequelize = require('sequelize');
 
-const TABLE_NAME = 'sample';
-const STATUS = {
-  valid: 1,   // 有効
-  invalid: 2, // 無効
-};
+const TABLE_NAME = 'image_tmp';
 
-// FIXME CHECK DEFINE DATA TYPES
-class Sample extends Sequelize.Model {
+class ImageTmp extends Sequelize.Model {
   static init(sequelize) {
     const attributes = {
       id: {
@@ -16,36 +11,34 @@ class Sample extends Sequelize.Model {
         primaryKey: true,
         autoIncrement: true,
       },
-      status: {
-        type: Sequelize.TINYINT,
+      user_id: {
+        type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
-        defaultValue: STATUS.valid,
       },
-      text: {
-        type: Sequelize.STRING(255),
-        allowNull: true,
-      }
+      mime_type: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      image_path: {
+        type: Sequelize.STRING().BINARY,
+        allowNull: false,
+      },
     };
     const options = {
       sequelize,
       modelName: TABLE_NAME,
       freezeTableName: true,
-      timestamps: true,
+      timestamp: true,
       createdAt: 'created',
-      updatedAt: 'modified',
+      updatedAt: false,
       charset: 'utf8',
     };
 
     return super.init(attributes, options);
   }
-
-  static getStatus() {
-    return STATUS;
-  }
 }
-
 module.exports = sequelize => {
-  Sample.init(sequelize);
+  ImageTmp.init(sequelize);
 
-  return Sample;
+  return ImageTmp;
 };

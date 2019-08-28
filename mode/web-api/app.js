@@ -16,6 +16,8 @@ class Service extends core.Application {
   }
 
   async init() {
+    this.app.set('views', utils.parser.pathJoin(__dirname, 'views'));
+    this.app.set('view engine', 'pug');
     this.app.use(cors(config.cors));
     // Install the I18next on your express app
     this.app.use(i18next('ko', ['ko', 'ja'], {
@@ -28,6 +30,13 @@ class Service extends core.Application {
     new OpenApiValidator({
       apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
     }).install(this.app);
+    // Install the oauth on your express app
+    const oauth_options = {
+      clientID: this.ctx.environment.GOOGLE_CLIENT_ID,
+      clientSecret: this.ctx.environment.GOOGLE_CLIENT_SECRET,
+      callbackURL: config.oauth.callbackURL,
+    };
+    utils.oauth.install(this.app, oauth_options);
 
     // load route
     super.loadRoutes(routes);
@@ -53,19 +62,19 @@ class Service extends core.Application {
           message: err.message,
         });
       // エラー扱いになるよ…
-      else if(err.status && err.status === code.NOT_FOUND)
+      else if(err.status && err.status === code.NOT_FOUND) {
         res.status(code.NOT_FOUND).send('what??? (╯°□°）╯︵ ┻━┻');
-      else if(err.status)
+      } else if(err.status) {
         res.status(err.status).json({
           errors: err.errors,
         });
-      else
+      } else {
         res.status(code.SERVICE_UNAVAILABLE).end();
-
+      }
     });
   }
 }
 
-module.exports = env => {
-  return new Service(env);
+module.exports = ctx => {
+  return new Service(ctx);
 };

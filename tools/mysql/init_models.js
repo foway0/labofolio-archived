@@ -11,7 +11,9 @@
   const sequelize = context.getMysqlConnect();
   const models = context.models;
   const fixtures = [
-    models.sample
+    models.sample,
+    models.users,
+    models.blog,
   ];
 
   for(const fixture of fixtures) {
