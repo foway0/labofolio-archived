@@ -10,11 +10,11 @@ describe('core/utils/error_handler', () => {
 
     it('should throw error', () => {
       try {
-        new error('must be error', 'UT_ERROR', 500);
+        throw new error('must be error', 'UT_ERROR', 500);
       } catch (e) {
         e.message.should.equal('must be error');
-        e.statusCode.should.equal('UT_ERROR');
-        e.code.should.equal(500);
+        e.name.should.equal('UT_ERROR');
+        e.statusCode.should.equal(500);
       }
     });
   });

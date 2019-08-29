@@ -6,3 +6,7 @@ node_modules/
 
 # test file
 hoge.js
+
+# unit test coverage tools
+coverage
+.nyc_output
