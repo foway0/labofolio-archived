@@ -36,7 +36,7 @@ class Service extends core.Application {
       clientSecret: this.ctx.environment.GOOGLE_CLIENT_SECRET,
       callbackURL: config.oauth.callbackURL,
     };
-    utils.oauth.install(this.app, oauth_options);
+    context.installOauth(this.app, oauth_options);
 
     // load route
     super.loadRoutes(routes);

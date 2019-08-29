@@ -8,7 +8,7 @@ log4js.addLayout('line', () => {
 log4js.addLayout('json', config => {
   return logEvent => {
     const a = {};
-    if(logEvent.level.levelStr === 'error')
+    if(logEvent.level.levelStr === 'ERROR')
       a.error = logEvent.data[0];
     else
       a.data = logEvent.data[0];
@@ -72,11 +72,11 @@ const styles = {
 };
 
 function colorizeStart(style) {
-  return style ? `\x1B[${styles[style][0]}m` : '';
+  return `\x1B[${styles[style][0]}m`;
 }
 
 function colorizeEnd(style) {
-  return style ? `\x1B[${styles[style][1]}m` : '';
+  return `\x1B[${styles[style][1]}m`;
 }
 
 function colorize(str, style) {
@@ -114,7 +114,7 @@ class Log4js {
     logger.error(msg);
   }
 
-  static fatal(mode, msg) {
+  static fatal(mode, ...msg) {
     const logger = log4js.getLogger(mode);
     logger.fatal(msg);
   }
