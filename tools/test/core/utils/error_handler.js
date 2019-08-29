@@ -16,6 +16,13 @@ describe('core/utils/error_handler', () => {
         e.name.should.equal('UT_ERROR');
         e.statusCode.should.equal(500);
       }
+
+      try {
+        throw new error('must be error', 'UT_ERROR');
+      } catch (e) {
+        e.message.should.equal('must be error');
+        e.name.should.equal('UT_ERROR');
+      }
     });
   });
 });

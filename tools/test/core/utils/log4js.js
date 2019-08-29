@@ -17,5 +17,11 @@ describe('core/utils/log4js', () => {
       log4js.error('out', 'UT');
       log4js.fatal('out', 'UT');
     });
+
+    it('should stdout log - customized layout', () => {
+      log4js.info('line','=======================');
+      log4js.info('json', {labofolio: 'qwerty', hey: 'man'});
+      log4js.error('json', {labofolio: 'qwerty', hey: 'man'});
+    });
   });
 });
