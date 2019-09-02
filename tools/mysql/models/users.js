@@ -69,6 +69,14 @@ class Users extends Sequelize.Model {
 
     return super.init(attributes, options);
   }
+
+  static getStatus() {
+    return STATUS;
+  }
+
+  static getRoleId() {
+    return ROLE_ID;
+  }
 }
 module.exports = sequelize => {
   Users.init(sequelize);

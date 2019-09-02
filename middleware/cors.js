@@ -1,5 +1,6 @@
 const {context} = require('../core');
-const {utils} = context;
+const {utils, logger, constant} = context;
+const code = constant.statusCode;
 /**
  *
  * @param headers {Object}
@@ -13,6 +14,7 @@ module.exports = headers => {
       for(const header in headers) {
 
         res.header(header, headers[header]);
+        logger.info('json', `${header}: ${headers[header]}`);
       }
     } else {
       // default settings
@@ -20,6 +22,10 @@ module.exports = headers => {
       res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, HEAD, OPTIONS');
       res.header('Access-Control-Allow-Headers', 'Content-Type');
     }
-    next();
+    if ('OPTIONS' === req.method) {
+      //respond with 200
+      return res.send(code.OK);
+    }
+    return next();
   };
 };

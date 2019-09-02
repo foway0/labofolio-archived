@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-const TABLE_NAME = 'image_tmp';
+const TABLE_NAME = 'blogs_snapshots';
 
-class ImageTmp extends Sequelize.Model {
+class BlogsSnapshots extends Sequelize.Model {
   static init(sequelize) {
     const attributes = {
       id: {
@@ -11,16 +11,25 @@ class ImageTmp extends Sequelize.Model {
         primaryKey: true,
         autoIncrement: true,
       },
-      user_id: {
+      blog_id: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
       },
-      mime_type: {
+      subject: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      image_path: {
-        type: Sequelize.STRING().BINARY,
+      content_text: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        comment: 'search only'
+      },
+      content_md: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      content_html: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
     };
@@ -38,7 +47,7 @@ class ImageTmp extends Sequelize.Model {
   }
 }
 module.exports = sequelize => {
-  ImageTmp.init(sequelize);
+  BlogsSnapshots.init(sequelize);
 
-  return ImageTmp;
+  return BlogsSnapshots;
 };

@@ -20,6 +20,6 @@ module.exports = (defaultLng, wl, locales) => {
     });
 
     req.i18next = i18next;
-    next();
+    return next();
   };
 };

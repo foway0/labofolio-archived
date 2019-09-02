@@ -17,6 +17,7 @@ class Application {
     this.app.set('trust proxy', true);
 
     this.app.use(express.urlencoded({extended: true}));
+    this.app.use(express.json());
 
     this.app.get('/favicon.ico', (req, res) => res.sendStatus(204));
     if(this.env === 'local') {

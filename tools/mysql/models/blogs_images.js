@@ -1,13 +1,8 @@
 const Sequelize = require('sequelize');
 
-const TABLE_NAME = 'blog_category';
-const STATUS = {
-  valid: 1,
-  invalid: 2,
-  private: 3,
-};
+const TABLE_NAME = 'blogs_images';
 
-class BlogCategory extends Sequelize.Model {
+class BlogsImages extends Sequelize.Model {
   static init(sequelize) {
     const attributes = {
       id: {
@@ -16,22 +11,20 @@ class BlogCategory extends Sequelize.Model {
         primaryKey: true,
         autoIncrement: true,
       },
-      parent_id: {
+      blog_id: {
         type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: true,
-        comment: 'this is for recursive category',
-      },
-      status: {
-        type: Sequelize.TINYINT,
         allowNull: false,
-        defaultValue: STATUS.valid
       },
-      title: {
+      mime_type: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      sort_num: {
-        type: Sequelize.INTEGER.UNSIGNED,
+      image_path: {
+        type: Sequelize.STRING().BINARY,
+        allowNull: false,
+      },
+      thumbnail_image_path: {
+        type: Sequelize.STRING().BINARY,
         allowNull: false,
       },
     };
@@ -49,7 +42,7 @@ class BlogCategory extends Sequelize.Model {
   }
 }
 module.exports = sequelize => {
-  BlogCategory.init(sequelize);
+  BlogsImages.init(sequelize);
 
-  return BlogCategory;
+  return BlogsImages;
 };

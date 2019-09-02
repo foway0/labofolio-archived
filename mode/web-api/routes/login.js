@@ -3,8 +3,9 @@ const moment = require('moment');
 require('moment-timezone');
 
 const {context} = require('../../../core');
-const {services, utils, environment} = context;
+const {services, utils, environment, constant} = context;
 const config = context.getConfig();
+const code = constant.statusCode;
 
 const router = express.Router();
 
@@ -34,5 +35,5 @@ async function callback(req, res) {
   };
   const token = utils.jwt.generateToken(data, environment.JWT_SECRET, config.token_expire);
 
-  res.status(200).render('auth.pug', {token: token});
+  res.status(code.OK).render('auth.pug', {token: token, role:result[0].role_id});
 }

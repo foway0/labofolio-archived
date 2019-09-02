@@ -64,12 +64,17 @@ class Service extends core.Application {
       // エラー扱いになるよ…
       else if(err.status && err.status === code.NOT_FOUND) {
         res.status(code.NOT_FOUND).send('what??? (╯°□°）╯︵ ┻━┻');
+        this.logger.debug('line', `what??? (╯°□°）╯︵ ┻━┻`);
       } else if(err.status) {
         res.status(err.status).json({
           errors: err.errors,
         });
+        this.logger.debug('json', {
+          errors: err.errors,
+        });
       } else {
         res.status(code.SERVICE_UNAVAILABLE).end();
+        this.logger.debug('line', `503!!!`);
       }
     });
   }

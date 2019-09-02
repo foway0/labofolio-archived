@@ -89,15 +89,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/oauth'
 
-  /blog:
+  ######################
+  # blog
+  ######################
+  /blogs:
     post:
       description: |
         blog post
       operationId: blogPost
+      parameters:
+        - $ref: '#/components/parameters/authorization'
       responses:
         '204':
           description: No Content
+    get:
+      description: |
+        blog list
+      operationId: blogList
+      responses:
+        '200':
+          description: No Content
 components:
+  parameters:
+    authorization:
+      in: header
+      description: jwt tokens
+      name: Authorization
+      schema:
+        type: string
+      required: true
+
+
+
   schemas:
     Sample:
       properties:

@@ -32,7 +32,8 @@ const service = env => { // eslint-disable-line no-unused-vars
       cors: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, User-Agent',
+        'Access-Control-Expose-Headers': 'Authorization',
       },
       oauth: {
         callbackURL: 'http://localhost/auth/google/callback'

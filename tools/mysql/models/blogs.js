@@ -61,6 +61,10 @@ class Blogs extends Sequelize.Model {
 
     return super.init(attributes, options);
   }
+
+  static getStatus() {
+    return STATUS;
+  }
 }
 module.exports = sequelize => {
   Blogs.init(sequelize);

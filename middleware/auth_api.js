@@ -2,6 +2,9 @@ const {context} = require('../core');
 const {services, utils, environment, constant} = context;
 const code = constant.statusCode;
 
+const users = context.getStoresServices().users;
+const ROLE_ID = users.getRoleId();
+
 const doAsync = utils.wrapper.doAsync;
 
 module.exports = {
@@ -32,6 +35,14 @@ module.exports = {
       throw new utils.error('user does not exists', 'Unauthorized', code.UNAUTHORIZED);
     }
     req.user = user;
+
+    return next();
+  }),
+  checkRole: doAsync(async (req, res, next) => {
+    const user = req.user;
+
+    if(user.role_id !== ROLE_ID.admin)
+      throw new utils.error('have no authority', 'Unauthorized', code.UNAUTHORIZED);
 
     return next();
   }),
