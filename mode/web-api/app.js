@@ -24,8 +24,6 @@ class Service extends core.Application {
       ko: { translation: locales.ko },
       ja: { translation: locales.ja },
     }));
-    // Install the bugsnag on your express app
-    this.app.use(bugsnag.requestHandler);
     // Install the OpenApiValidator on your express app
     new OpenApiValidator({
       apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
@@ -35,6 +33,8 @@ class Service extends core.Application {
       clientID: this.ctx.environment.GOOGLE_CLIENT_ID,
       clientSecret: this.ctx.environment.GOOGLE_CLIENT_SECRET,
       callbackURL: config.oauth.callbackURL,
+      login_url: config.oauth.login_url,
+      login_url_redirect: config.oauth.login_url_redirect,
     };
     context.installOauth(this.app, oauth_options);
 
@@ -53,7 +53,6 @@ class Service extends core.Application {
     });
 
     // error handler
-    this.app.use(bugsnag.errorHandler);
     this.app.use((err, req, res, next) => {
       // Will get here
       if(err.statusCode)
@@ -80,6 +79,4 @@ class Service extends core.Application {
   }
 }
 
-module.exports = ctx => {
-  return new Service(ctx);
-};
+module.exports = ctx => new Service(ctx);

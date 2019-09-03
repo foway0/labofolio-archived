@@ -20,6 +20,13 @@ module.exports = router;
 async function callback(req, res) {
   req.user.ua = req.get('user-agent');
   const info = req.user.profile._json;
+  const email = req.user.profile._json.email;
+  const email_domains = email.trim().split('@')[1];
+  console.log(email_domains);
+  console.log(config.oauth.allow_email_domains);
+  if(!config.oauth.allow_email_domains.includes(email_domains)) {
+    throw new utils.error('email domains not matched', 'email domains validation error', code.BAD_REQUEST);
+  }
   const opts = {
     strategy_id: info.sub,
     nickname: info.name,
@@ -35,5 +42,5 @@ async function callback(req, res) {
   };
   const token = utils.jwt.generateToken(data, environment.JWT_SECRET, config.token_expire);
 
-  res.status(code.OK).render('auth.pug', {token: token, role:result[0].role_id});
+  res.status(code.OK).render('auth.pug', {token: token, role:result[0].role_id, host: config.oauth.web_host});
 }

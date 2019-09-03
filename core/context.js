@@ -29,7 +29,6 @@ class Context {
   async init() {
     await this.initStores();
     this.initServices();
-    this.initBugsnag();
   }
 
   async initStores() {
@@ -79,6 +78,10 @@ class Context {
     passport.deserializeUser(function(obj, done) {
       done(null, obj);
     });
+    const login_url = ops.login_url;
+    const login_url_redirect = ops.login_url_redirect;
+    delete ops.login_url;
+    delete ops.login_url_redirect;
     const gStrategy = new GoogleStrategy(ops,
       (accessToken, refreshToken, profile, done) => {
         process.nextTick(() => {
@@ -88,8 +91,8 @@ class Context {
     passport.use(gStrategy);
     refresh.use(gStrategy);
     app.use(passport.initialize());
-    app.get('/auth/google', passport.authenticate('google', { scope: ['profile'], accessType: 'offline' }));
-    app.get('/auth/google/callback', passport.authenticate( 'google', ));
+    app.get(login_url, passport.authenticate('google', { scope: ['profile', 'email'], accessType: 'offline' }));
+    app.get(login_url_redirect, passport.authenticate( 'google', ));
   }
 
   getMysqlConnect() {

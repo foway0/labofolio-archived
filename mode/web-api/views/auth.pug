@@ -1,4 +1,4 @@
 script.
-  document.domain = "localhost";
+  document.domain = '#{host}';
   window.opener.authenticateCallback('#{token}', '#{role}');
   window.close();
