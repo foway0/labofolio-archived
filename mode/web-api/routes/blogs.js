@@ -1,4 +1,5 @@
 const express = require('express');
+const striptags = require('striptags');
 const MarkdownIt = require('markdown-it');
 const Prism = require('prismjs');
 const stripBom = require('strip-bom');
@@ -8,12 +9,12 @@ const md = new MarkdownIt({
     let hl;
 
     try {
-      hl = Prism.highlight(str, Prism.languages[lang])
+      hl = Prism.highlight(str, Prism.languages[lang]);
     } catch (error) {
-      hl = md.utils.escapeHtml(str)
+      hl = md.utils.escapeHtml(str);
     }
 
-    return `<pre class="language-${lang}"><code class="language-${lang}">${hl}</code></pre>`
+    return `<pre class="language-${lang}"><code class="language-${lang}">${hl}</code></pre>`;
   }
 });
 
@@ -38,6 +39,7 @@ module.exports = router;
 async function post(req, res) {
   const example = stripBom(req.body.content_md);
   req.body.content_html = md.render(example);
+  req.body.content_text = striptags(req.body.content_html);
   req.body.user_id = req.user.id;
   await services.blogs.create(req.body);
   res.status(code.NO_CONTENT).send();

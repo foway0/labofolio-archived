@@ -40,6 +40,6 @@ describe('core/utils/jwt.js', () => {
       } catch (e) {
         e.message.should.be.equal('jwt expired');
       }
-    })
+    });
   });
 });

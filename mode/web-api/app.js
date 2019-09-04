@@ -4,7 +4,7 @@ const core = require('../../core');
 const routes = require('./routes');
 
 const context = core.context;
-const {utils, middleware, locales, bugsnag} = context;
+const {utils, middleware, locales} = context;
 const code = context.constant.statusCode;
 const {i18next, cors} = middleware;
 const config = context.getConfig();

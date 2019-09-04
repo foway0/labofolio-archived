@@ -10,7 +10,7 @@ module.exports = {
       subject: body.subject,
       content_md: body.content_md,
       content_html: body.content_html,
-      content_text: body.content_md,
+      content_text: body.content_text,
     });
   },
   findAll: () => {
