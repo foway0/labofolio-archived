@@ -36,7 +36,7 @@ const service = env => { // eslint-disable-line no-unused-vars
         'Access-Control-Expose-Headers': 'Authorization',
       },
       oauth: {
-        callbackURL: 'http://localhost/auth/google/callback',
+        callbackURL: 'https://localhost/auth/google/callback',
         web_host: 'localhost',
         login_url: '/auth/google',
         login_url_redirect: '/auth/google/callback',
