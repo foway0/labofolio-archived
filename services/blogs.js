@@ -1,5 +1,6 @@
 const {context} = require('../core');
 const blogs = context.getStoresServices().blogs;
+const users = context.getStoresServices().users;
 
 module.exports = {
   create: body => {
@@ -13,13 +14,21 @@ module.exports = {
       content_text: body.content_text,
     });
   },
-  findAll: () => {
-    console.log(context.getStoresServices());
+  findAll: (query = {}) => {
+    blogs.belongsTo(users, {foreignKey: 'user_id'});
     const options = {
       where: {
         status: blogs.getStatus().valid,
       },
+      include: [{
+        model: users,
+        attributes: ['nickname', 'profile_url']
+      }]
     };
-    return blogs.findAll(options);
+    if(query) {
+      options.limit = query.limit;
+      options.offset = query.offset;
+    }
+    return blogs.findAndCountAll(options);
   }
 };

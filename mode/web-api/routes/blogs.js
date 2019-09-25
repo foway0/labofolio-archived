@@ -46,6 +46,10 @@ async function post(req, res) {
 }
 
 async function list(req, res) {
-  const result = await services.blogs.findAll();
+  const result = await services.blogs.findAll(req.query);
+  if(req.query) {
+    result.limit = req.query.limit;
+    result.offset = req.query.offset;
+  }
   res.status(code.OK).json(result);
 }

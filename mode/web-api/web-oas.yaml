@@ -106,11 +106,28 @@ paths:
       description: |
         blog list
       operationId: blogList
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: No Content
 components:
   parameters:
+    limit:
+      in: query
+      description: pagination limit
+      name: limit
+      schema:
+        type: integer
+      required: false
+    offset:
+      in: query
+      description: pagination offset
+      name: offset
+      schema:
+        type: integer
+      required: false
     authorization:
       in: header
       description: jwt tokens
