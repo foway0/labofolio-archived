@@ -21,8 +21,6 @@
   },
   "homepage": "https://github.com/foway0/labofolio#readme",
   "dependencies": {
-    "@bugsnag/js": "^6.4.3",
-    "@bugsnag/plugin-express": "^6.4.1",
     "express": "^4.17.1",
     "express-openapi-validator": "^2.17.0",
     "i18next": "^19.0.1",

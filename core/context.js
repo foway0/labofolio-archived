@@ -1,6 +1,4 @@
 const Sequelize = require('sequelize');
-const bugsnag = require('@bugsnag/js');
-const bugsnagExpress = require('@bugsnag/plugin-express');
 const passport = require('passport');
 const refresh = require('passport-oauth2-refresh');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -40,23 +38,6 @@ class Context {
       .catch(err => {
         this.logger.error('json', 'Unable to connect to the database:', err);
       });
-  }
-
-  initBugsnag() {
-    const bugsnagClient = bugsnag({
-      apiKey: this.environment.BUGSNAG_API_KEY,
-      releaseStage: this.environment.SERVICE_ENV,
-      // TODO custom ?
-      //logger: null,
-      metaData: {
-        app: {
-          mode: this.environment.SERVICE_MODE,
-        }
-      }
-    });
-    bugsnagClient.use(bugsnagExpress);
-
-    this.bugsnag = bugsnagClient.getPlugin('express');
   }
 
   initServices() {
