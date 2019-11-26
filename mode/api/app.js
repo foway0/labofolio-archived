@@ -26,7 +26,7 @@ class Service extends core.Application {
     }));
     // Install the OpenApiValidator on your express app
     new OpenApiValidator({
-      apiSpecPath: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
+      apiSpec: utils.parser.pathJoin(__dirname, 'web-oas.yaml'),
     }).install(this.app);
     // Install the oauth on your express app
     const oauth_options = {
