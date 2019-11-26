@@ -28,7 +28,7 @@ const stores = env => {
 
 const service = env => { // eslint-disable-line no-unused-vars
   return {
-    'web-api': {
+    api: {
       cors: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, HEAD, OPTIONS',

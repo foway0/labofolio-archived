@@ -13,8 +13,8 @@
 
   let server;
   switch (context.environment.SERVICE_MODE) {
-    case 'web-api':
-      server = require('./mode/web-api/app')(context);
+    case 'api':
+      server = require('./mode/api/app')(context);
       await server.init();
       return server.start();
     default:
