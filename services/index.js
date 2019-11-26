@@ -1,9 +1,5 @@
-const sample = require('./sample');
-const users = require('./users');
-const blogs = require('./blogs');
-
 module.exports = {
-  sample,
-  users,
-  blogs,
+  sample: require('./sample'),
+  users: require('./users'),
+  blogs: require('./blogs'),
 };

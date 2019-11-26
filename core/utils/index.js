@@ -1,15 +1,8 @@
-const error = require('./error_handler');
-const parser = require('./parser');
-const wrapper = require('./wrapper');
-const log4js = require('./log4js');
-const is = require('./type_checker');
-const jwt = require('./jwt');
-
 module.exports = {
-  error,
-  parser,
-  wrapper,
-  log4js,
-  is,
-  jwt,
+  error: require('./error_handler'),
+  parser: require('./parser'),
+  wrapper: require('./wrapper'),
+  log4js: require('./log4js'),
+  is: require('./type_checker'),
+  jwt: require('./jwt'),
 };

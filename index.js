@@ -4,8 +4,8 @@
   context.setParams('environment', shared.environment);
   context.setParams('constant', shared.constant);
   context.setParams('config', shared.config);
+  context.setParams('locales', shared.locales);
   context.setParams('models', require('./tools/mysql/models'));
-  context.setParams('locales', require('./tools/locales'));
 
   await context.init();
   // ロード問題

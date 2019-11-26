@@ -1,7 +1,4 @@
-const context = require('./context');
-const Application = require('./application');
-
 module.exports = {
-  context,
-  Application,
+  context: require('./context'),
+  Application: require('./application'),
 };
