@@ -1,7 +1,7 @@
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
 
-const parser = require('../../../../core/utils/parser');
+const parser = require('../../../core/utils/parser');
 describe('core/utils/parser', () => {
   describe('loadYaml', () => {
     const yaml = parser.loadYaml(`${__dirname}/../../fixtures/test.yaml`);

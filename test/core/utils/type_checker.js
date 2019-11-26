@@ -1,7 +1,7 @@
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
 
-const is = require('../../../../core/utils/type_checker');
+const is = require('../../../core/utils/type_checker');
 describe('core/utils/type_checker', () => {
   describe('objectEmptyChecker', () => {
     it('should return true', () => {

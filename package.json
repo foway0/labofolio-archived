@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tools/test --recursive",
+    "test": "mocha test --recursive",
     "coverage": "nyc --reporter html npm test",
     "start": "nodemon -e js,yaml --delay 80ms --exec 'kill-port --port 53000 && node --inspect=0.0.0.0:53000 ./index.js'",
     "debug": "DEBUG=express:* npm start",

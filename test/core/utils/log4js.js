@@ -1,7 +1,7 @@
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
 
-const log4js = require('../../../../core/utils/log4js');
+const log4js = require('../../../core/utils/log4js');
 describe('core/utils/log4js', () => {
   describe('log', () => {
     it('should return Function', () => {

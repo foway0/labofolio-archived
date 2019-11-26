@@ -1,6 +1,6 @@
 const {describe, it} = require('mocha');
 
-const jwt = require('../../../../core/utils/jwt');
+const jwt = require('../../../core/utils/jwt');
 describe('core/utils/jwt.js', () => {
   const SECRET = 'labofolio-unit-test';
   let tokens;

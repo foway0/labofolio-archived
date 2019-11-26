@@ -1,7 +1,7 @@
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
 
-const error = require('../../../../core/utils/error_handler');
+const error = require('../../../core/utils/error_handler');
 describe('core/utils/error_handler', () => {
   describe('error', () => {
     it('should return Function', () => {
