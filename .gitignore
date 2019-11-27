@@ -1,0 +1,15 @@
+# mac
+.DS_Store
+
+# IDE
+.idea
+
+# node
+node_modules
+
+# test file
+hoge.js
+
+# unit test coverage reports
+coverage
+.nyc_output
