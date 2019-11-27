@@ -13,3 +13,6 @@ hoge.js
 # unit test coverage reports
 coverage
 .nyc_output
+
+# built ts files
+dist

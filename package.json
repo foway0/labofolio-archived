@@ -3,5 +3,21 @@
   "version": "1.0.0",
   "description": "foway's blog",
   "author": "foway0",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/foway0/labofolio#readme",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foway0/labofolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/foway0/labofolio/issues"
+  }
 }

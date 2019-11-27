@@ -1,8 +1,8 @@
 # labofolio
 
 ## TODO
-- [ ] eslint
 - [ ] type script
+- [ ] eslint
 - [ ] express
 - [ ] oas3
 - [ ] unit test
