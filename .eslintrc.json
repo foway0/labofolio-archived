@@ -39,6 +39,9 @@
     ],
     "no-unused-vars": [
       "error", { "argsIgnorePattern": "req|res|next" }
-    ]
+    ],
+
+    /* typescript */
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
