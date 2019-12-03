@@ -3,9 +3,9 @@ import http from 'http';
 import https from 'https';
 
 class Application {
-  private readonly host: string;
-  private readonly port: number;
-  private readonly app: express.Express;
+  protected readonly host: string;
+  protected readonly port: number;
+  protected readonly app: express.Express;
   private server: https.Server | http.Server | undefined;
 
   constructor(host: string, port: number) {

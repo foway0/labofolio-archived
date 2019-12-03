@@ -1,5 +1,9 @@
-import Application from './application';
+import Service from './app/api/app';
 
-const env = {};
+(async (): Promise<void> => {
+  const env = {};
 
-new Application('localhost', 3000).start(env);
+  const app = new Service('localhost', 3000);
+  await app.init();
+  app.start(env);
+})();

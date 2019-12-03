@@ -4,7 +4,7 @@
 - [x] type script
 - [x] eslint
 - [x] express
-- [ ] oas3
+- [x] oas3
 - [ ] unit test
 - [ ] simple example
 
