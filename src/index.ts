@@ -1,13 +1,9 @@
-import { context } from './core/context';
+import http from 'http';
+import express from 'express';
 
-context.hi();
+const app = express();
+const server = http.createServer(app);
 
-function hi(name: string): string {
-  return `HELLO, ${name}!`;
-}
-
-(async (): Promise<void> => {
-  console.log(await context.double(5));
-})();
-
-console.log(hi('foway0'));
+server.listen(3000, 'localhost', () => {
+  console.log('localhost:3000 is on!');
+});
