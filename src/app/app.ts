@@ -2,16 +2,16 @@ import express from 'express';
 import { OpenApiValidator } from 'express-openapi-validator';
 import path from 'path';
 
-import Application from '../../application';
+import Application from '../application';
 
-class Service extends Application {
+class ApiApplication extends Application {
   constructor(host: string, port: number) {
     super(host, port);
   }
 
   async init(): Promise<void> {
     await new OpenApiValidator({
-      apiSpec: path.join(__dirname, '../../api_specs/api.yaml'),
+      apiSpec: path.join(__dirname, '../api_specs/api.yaml'),
       validateResponses: true
     }).install(this.app);
 
@@ -35,22 +35,15 @@ class Service extends Application {
         next: express.NextFunction
       ) => {
         // Will get here
-        if (err.statusCode) {
-          res.status(err.statusCode).json({
-            name: err.name,
-            message: err.message
-          });
-          // エラー扱いになるよ…
-        } else if (err.status && err.status === 404) {
+        if (err.status && err.status === 404) {
           console.log(`what??? (╯°□°）╯︵ ┻━┻`);
           res.status(404).send('what??? (╯°□°）╯︵ ┻━┻');
         } else {
-          console.log(`503!!!`);
-          res.status(503).end();
+          res.status(500).end();
         }
       }
     );
   }
 }
 
-export default Service;
+export default ApiApplication;

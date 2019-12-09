@@ -1,9 +1,9 @@
-import Service from './app/api/app';
+import env from './shared/environment';
+console.log(env);
+import ApiApplication from './app/app';
 
 (async (): Promise<void> => {
-  const env = {};
-
-  const app = new Service('localhost', 3000);
+  const app = new ApiApplication(env.SERVICE_HOST, env.SERVICE_PORT);
   await app.init();
   app.start(env);
 })();

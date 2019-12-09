@@ -27,20 +27,19 @@
       - schemas
       - parameters
   - app(server extends application)
-    - api
-      - routes(controller)
-        - blogs
-          - get
-            ```
-              helper.mysql.findById(1);
+     - routes(controller)
+       - blogs
+         - get
+           ```
+             helper.mysql.findById(1);
 
-              for( ; ; ) {
+             for( ; ; ) {
                 return data;
-              }
-            ```
-        - users
-        - categories
-      - app.js { loadOas3 { apiSpec: '../docs/api.yml'} }
+             }
+           ```
+       - users
+       - categories
+     - app.js { loadOas3 { apiSpec: '../docs/api.yml'} }
   - middleware
     - auth_api
     - error_handler

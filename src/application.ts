@@ -2,13 +2,13 @@ import express from 'express';
 import http from 'http';
 import https from 'https';
 
-class Application {
+abstract class Application {
   protected readonly host: string;
   protected readonly port: number;
   protected readonly app: express.Express;
   private server: https.Server | http.Server | undefined;
 
-  constructor(host: string, port: number) {
+  protected constructor(host: string, port: number) {
     this.host = host;
     this.port = port;
 
@@ -30,6 +30,8 @@ class Application {
       console.log(`${this.host}:${this.port} in on!`);
     });
   }
+
+  abstract async init(): Promise<void>;
 }
 
 export default Application;

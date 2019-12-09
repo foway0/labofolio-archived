@@ -16,3 +16,6 @@ coverage
 
 # built ts files
 dist
+
+# API keys and secrets
+.env
