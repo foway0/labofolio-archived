@@ -1,5 +1,4 @@
 import env from './shared/environment';
-console.log(env);
 import ApiApplication from './app/app';
 
 (async (): Promise<void> => {
