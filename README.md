@@ -1,5 +1,15 @@
 # labofolio
 
+## QuickStart
+
+- This project depends on [labofolio-env.](https://github.com/foway0/labofolio-env/blob/master/README.md)
+
+```
+cp -ip .env.template .env
+cd /path/labofolio-env
+make dressup
+```
+
 ## TODO
 - [x] type script
 - [x] eslint

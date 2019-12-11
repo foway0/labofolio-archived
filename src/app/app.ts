@@ -1,8 +1,10 @@
-import express from 'express';
+import { Router } from 'express';
 import { OpenApiValidator } from 'express-openapi-validator';
 import path from 'path';
 
 import Application from '../application';
+import { ping } from './routes/ping';
+import { errorHandler } from '../middleware/error_handler';
 
 class ApiApplication extends Application {
   constructor(host: string, port: number) {
@@ -22,27 +24,12 @@ class ApiApplication extends Application {
     });
 
     // api
-    this.app.get('/ping', (req, res) => {
-      res.status(200).send('pong');
-    });
+    const pingRouter = Router();
+    pingRouter.route('/ping').get(ping);
+    this.app.use('/', pingRouter);
 
     // error handler
-    this.app.use(
-      (
-        err: any,
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction
-      ) => {
-        // Will get here
-        if (err.status && err.status === 404) {
-          console.log(`what??? (╯°□°）╯︵ ┻━┻`);
-          res.status(404).send('what??? (╯°□°）╯︵ ┻━┻');
-        } else {
-          res.status(500).end();
-        }
-      }
-    );
+    this.app.use(errorHandler);
   }
 }
 
