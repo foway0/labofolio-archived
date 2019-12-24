@@ -1,11 +1,11 @@
-import express from 'express';
-import http from 'http';
-import https from 'https';
+import * as express from 'express';
+import * as http from 'http';
+import * as https from 'https';
 
 abstract class Application {
   protected readonly host: string;
   protected readonly port: number;
-  protected readonly app: express.Express;
+  readonly app: express.Express;
   private server: https.Server | http.Server | undefined;
 
   protected constructor(host: string, port: number) {

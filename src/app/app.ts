@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { OpenApiValidator } from 'express-openapi-validator';
-import path from 'path';
+import * as path from 'path';
 
 import Application from '../application';
 import { ping } from './routes/ping';
