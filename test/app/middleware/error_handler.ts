@@ -11,11 +11,12 @@ test('errorHandler - 404', t => {
   };
   const req = mockReq();
   const res = mockRes();
-  const next = () => {
-    console.log('never used');
-  };
+  const next = sinon.spy();
+
   errorHandler(err, req, res, next);
 
+  t.false(next.called);
+  t.assert(res.status, '404');
   t.assert(res.send, 'what??? (╯°□°）╯︵ ┻━┻');
 });
 
@@ -25,10 +26,10 @@ test('errorHandler - 500', t => {
   };
   const req = mockReq();
   const res = mockRes();
-  const next = () => {
-    console.log('never used');
-  };
+  const next = sinon.spy();
+
   errorHandler(err, req, res, next);
 
+  t.false(next.called);
   t.assert(res.status, '500');
 });
