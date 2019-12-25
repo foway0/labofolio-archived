@@ -17,38 +17,30 @@ make dressup
 - [x] oas3
 - [ ] unit test
 - [ ] simple example
+- [ ] labofolio-kit
 
 ## file tree
 
-- test
-- tools
-  - mysql(master data migration)
-    - init_data
-      - fixtures
-        - blogs
-        - users
-        - categories
-  - redis
-  - mongoose
-- src/
++ test
++ src/
   - api_specs
     - api.yml
     - common
       - schemas
       - parameters
-  - app(server extends application)
+  - app(extends application)
      - routes(controller)
-       - blogs
+       - ping
+       - users
          - get
            ```
-             helper.mysql.findById(1);
+           helper.mysql.findById(1);
 
-             for( ; ; ) {
-                return data;
-             }
+           for( ; ; ) {
+             return data;
+           }
            ```
-       - users
-       - categories
+       - ...
      - app.js { loadOas3 { apiSpec: '../docs/api.yml'} }
   - middleware
     - auth_api
@@ -57,28 +49,24 @@ make dressup
   - helper
     - redis
     - mongoose
-    - super mysql - findById
+    - sequelize - findById, etc...
     - async wrapper
     - jwt
     - ...
   - shared
-    - config
+    - config(Object freeze)
       - local
       - prd
       - common (Object assign)
-    - environment
+    - environment(Object freeze)
     - constant
     - locales
-      - jp
-      - ko
-      - en
   - models(DDL mapping)
-    - blogs
-    - users
-    - categories
+    - mysql
+    - mongo
   - application
-  - context -> load shared & load models ...
-  - index.js
+  - context -> load shared & load models etc...
+  - index
 
 ## npm updates
 
