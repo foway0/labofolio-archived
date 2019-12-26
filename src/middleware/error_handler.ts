@@ -1,6 +1,11 @@
-import { ErrorHandler } from '../types/custom_functions';
+import { ErrorRequestHandler } from 'express';
 
-export const errorHandler: ErrorHandler = (err, req, res, next): void => {
+export const errorHandler: ErrorRequestHandler = (
+  err,
+  req,
+  res,
+  next
+): void => {
   // Will get here
   if (err.status && err.status === 404) {
     console.log(`what??? (╯°□°）╯︵ ┻━┻`);

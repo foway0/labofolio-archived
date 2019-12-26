@@ -5,7 +5,7 @@ import * as https from 'https';
 abstract class Application {
   protected readonly host: string;
   protected readonly port: number;
-  readonly app: express.Express;
+  readonly app: express.Application;
   private server: https.Server | http.Server | undefined;
 
   protected constructor(host: string, port: number) {
