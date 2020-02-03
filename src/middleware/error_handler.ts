@@ -1,3 +1,6 @@
+import * as Debug from 'debug';
+const debug = Debug('labofolio:error_handler');
+
 import { ErrorRequestHandler } from 'express';
 
 export const errorHandler: ErrorRequestHandler = (
@@ -8,7 +11,7 @@ export const errorHandler: ErrorRequestHandler = (
 ): void => {
   // Will get here
   if (err.status && err.status === 404) {
-    console.log(`what??? (╯°□°）╯︵ ┻━┻`);
+    debug(`what??? (╯°□°）╯︵ ┻━┻`);
     res.status(404).send('what??? (╯°□°）╯︵ ┻━┻');
   } else {
     res.status(500).end();

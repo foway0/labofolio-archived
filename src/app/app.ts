@@ -1,3 +1,6 @@
+import * as Debug from 'debug';
+const debug = Debug('labofolio:app');
+
 import { Router } from 'express';
 import { OpenApiValidator } from 'express-openapi-validator';
 import * as path from 'path';
@@ -19,7 +22,7 @@ class ApiApplication extends Application {
 
     // middleware
     this.app.use((req, res, next) => {
-      console.log(`${this.host}:${this.port}${req.url}`);
+      debug(`${this.host}:${this.port}${req.url}`);
       next();
     });
 

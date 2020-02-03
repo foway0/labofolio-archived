@@ -4,7 +4,6 @@ ENV HOME=/usr/src/app
 WORKDIR $HOME
 
 # Setup project
-ADD .env $HOME/.env
 ADD tsconfig.json $HOME/tsconfig.json
 ADD package.json $HOME/package.json
 ADD src $HOME/src

@@ -1,3 +1,6 @@
+import * as Debug from 'debug';
+const debug = Debug('labofolio:application');
+
 import * as express from 'express';
 import * as http from 'http';
 import * as https from 'https';
@@ -27,7 +30,7 @@ abstract class Application {
       this.server = http.createServer(this.app);
     }
     this.server.listen(this.port, this.host, () => {
-      console.log(`${this.host}:${this.port} in on!`);
+      debug(`${this.host}:${this.port} in on!`);
     });
   }
 
