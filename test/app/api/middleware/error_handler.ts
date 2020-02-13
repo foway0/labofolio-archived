@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import { mockReq, mockRes } from 'sinon-express-mock';
 
 
-import { errorHandler } from '../../../src/middleware/error_handler';
+import { errorHandler } from '../../../../src/middleware/error_handler';
 
 test('errorHandler - 404', t => {
   const err = {

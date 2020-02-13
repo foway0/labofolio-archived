@@ -1,5 +1,6 @@
-import * as Debug from 'debug';
-const debug = Debug('labofolio:application');
+const debug = process.env.DEBUG
+  ? require('debug')('labofolio:application')
+  : () => {};
 
 import * as express from 'express';
 import * as http from 'http';
@@ -9,7 +10,7 @@ abstract class Application {
   protected readonly host: string;
   protected readonly port: number;
   readonly app: express.Application;
-  private server: https.Server | http.Server | undefined;
+  private _server: https.Server | http.Server | undefined;
 
   protected constructor(host: string, port: number) {
     this.host = host;
@@ -25,11 +26,11 @@ abstract class Application {
         cert: env.SSL_CERT
       };
 
-      this.server = https.createServer(options, this.app);
+      this._server = https.createServer(options, this.app);
     } else {
-      this.server = http.createServer(this.app);
+      this._server = http.createServer(this.app);
     }
-    this.server.listen(this.port, this.host, () => {
+    this._server.listen(this.port, this.host, () => {
       debug(`${this.host}:${this.port} in on!`);
     });
   }

@@ -9,9 +9,10 @@
 - [x] eslint
 - [x] express
 - [x] oas3
-- [ ] unit test
-- [ ] simple example
-- [ ] labofolio-kit
+- [x] unit test
+- [ ] context
+- [ ] helper
+- [ ] labofolio-kit (Divide into small pieces)
 
 ## file tree
 
@@ -23,43 +24,28 @@
       - schemas
       - parameters
   - app(extends application)
-     - routes(controller)
-       - ping
-       - users
-         - get
-           ```
-           helper.mysql.findById(1);
-
-           for( ; ; ) {
-             return data;
-           }
-           ```
-       - ...
-     - app.js { loadOas3 { apiSpec: '../docs/api.yml'} }
+    - api
+      - routes(controller)
+      - app.js
   - middleware
     - auth_api
     - error_handler
-    - ...
   - helper
     - redis
     - mongoose
-    - sequelize - findById, etc...
+    - sequelize
     - async wrapper
     - jwt
-    - ...
   - shared
-    - config(Object freeze)
-      - local
-      - prd
-      - common (Object assign)
-    - environment(Object freeze)
+    - config
+    - environment
     - constant
     - locales
-  - models(DDL mapping)
+  - models
     - mysql
     - mongo
   - application
-  - context -> load shared & load models etc...
+  - context
   - index
 
 ## npm updates

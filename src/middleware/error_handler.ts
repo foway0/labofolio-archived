@@ -1,5 +1,6 @@
-import * as Debug from 'debug';
-const debug = Debug('labofolio:error_handler');
+const debug = process.env.DEBUG
+  ? require('debug')('labofolio:error_handler')
+  : () => {};
 
 import { ErrorRequestHandler } from 'express';
 

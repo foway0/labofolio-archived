@@ -1,11 +1,10 @@
-import * as Debug from 'debug';
-const debug = Debug('labofolio:app');
+const debug = process.env.DEBUG ? require('debug')('labofolio:app') : () => {};
 
 import { OpenApiValidator } from 'express-openapi-validator';
 import * as path from 'path';
 
-import Application from '../application';
-import { errorHandler } from '../middleware/error_handler';
+import Application from '../../application';
+import { errorHandler } from '../../middleware/error_handler';
 
 class ApiApplication extends Application {
   constructor(host: string, port: number) {
@@ -14,9 +13,9 @@ class ApiApplication extends Application {
 
   async init(): Promise<void> {
     await new OpenApiValidator({
-      apiSpec: path.join(__dirname, '../api_specs/api.yaml'),
+      apiSpec: path.join(__dirname, '../../api_specs/api.yaml'),
       validateResponses: true,
-      operationHandlers: path.join(__dirname),
+      operationHandlers: path.join(__dirname)
     }).install(this.app);
 
     // middleware
