@@ -11,7 +11,8 @@ paths:
     get:
       description: |
         ping then pong
-      operationId: pingpong
+      operationId: ping
+      x-eov-operation-handler: routes/ping
       responses:
         '200':
           description: OK

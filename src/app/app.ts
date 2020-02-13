@@ -1,12 +1,10 @@
 import * as Debug from 'debug';
 const debug = Debug('labofolio:app');
 
-import { Router } from 'express';
 import { OpenApiValidator } from 'express-openapi-validator';
 import * as path from 'path';
 
 import Application from '../application';
-import { ping } from './routes/ping';
 import { errorHandler } from '../middleware/error_handler';
 
 class ApiApplication extends Application {
@@ -17,7 +15,8 @@ class ApiApplication extends Application {
   async init(): Promise<void> {
     await new OpenApiValidator({
       apiSpec: path.join(__dirname, '../api_specs/api.yaml'),
-      validateResponses: true
+      validateResponses: true,
+      operationHandlers: path.join(__dirname),
     }).install(this.app);
 
     // middleware
@@ -25,11 +24,6 @@ class ApiApplication extends Application {
       debug(`${this.host}:${this.port}${req.url}`);
       next();
     });
-
-    // api
-    const pingRouter = Router();
-    pingRouter.route('/ping').get(ping);
-    this.app.use('/', pingRouter);
 
     // error handler
     this.app.use(errorHandler);
