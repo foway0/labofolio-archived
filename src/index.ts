@@ -1,6 +1,5 @@
 import env from './shared/environment';
 import config from './shared/config';
-import ApiApplication from './app/api/app';
 import Context from './context';
 
 (async (): Promise<void> => {
@@ -8,7 +7,21 @@ import Context from './context';
   Context.initModels();
   await Context.syncModels();
 
-  const app = new ApiApplication(env.SERVICE_HOST, env.SERVICE_PORT);
+  let service;
+  switch (env.SERVICE_MODE) {
+    case 'api':
+      service = require('./app/api/app').ApiApplication;
+      break;
+    case 'admin':
+      service = require('./app/admin/app').AdminApplication;
+      break;
+    default:
+      throw Error('server mode ERROR!');
+  }
+  const app = new service(env.SERVICE_HOST, env.SERVICE_PORT);
   await app.init();
   app.start(env);
-})();
+})().catch(err => {
+  console.log(err);
+  process.exit(1);
+});
