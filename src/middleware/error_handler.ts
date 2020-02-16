@@ -10,9 +10,11 @@ export const errorHandler: ErrorRequestHandler = (
   res,
   next
 ): void => {
+  debug('---------');
+  debug(err);
+  debug('---------');
   // Will get here
   if (err.status && err.status === 404) {
-    debug(`what??? (╯°□°）╯︵ ┻━┻`);
     res.status(404).send('what??? (╯°□°）╯︵ ┻━┻');
   } else if (err.status) {
     // format errors
@@ -21,9 +23,6 @@ export const errorHandler: ErrorRequestHandler = (
       errors: err.errors
     });
   } else {
-    debug('---------');
-    debug(err);
-    debug('---------');
     res.status(503).end();
   }
 };

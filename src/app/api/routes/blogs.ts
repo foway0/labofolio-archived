@@ -27,10 +27,12 @@ export const list: RequestHandler = wrap(
       limit: req.query.limit,
       offset: req.query.offset
     };
+
     const result = await SequelizeHelper.findAndCountAll(
       Context._db.blogs,
       options
     );
+
     res.status(200).json(result);
   }
 );

@@ -1,5 +1,5 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
-import { InitOptions, ModelAttributes } from 'sequelize';
+import { InitOptions, ModelAttributes } from 'sequelize/types/lib/model';
 
 const TABLE_NAME = 'users';
 const STATUS = {
@@ -57,7 +57,6 @@ class Users extends Model {
       charset: 'utf8',
       indexes: [{ unique: true, fields: ['strategy_id'] }]
     };
-
     this.init(attribute, options);
   }
 

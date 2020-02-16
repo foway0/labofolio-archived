@@ -30,13 +30,69 @@ paths:
 
 
   ######################
+  # users
+  ######################
+  /users:
+    post:
+      description: |
+        users post
+      x-eov-operation-id: create
+      x-eov-operation-handler: routes/users
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /users/{strategy_id}:
+    get:
+      description: |
+        users post
+      x-eov-operation-id: one
+      x-eov-operation-handler: routes/users
+      parameters:
+        - name: strategy_id
+          in: path
+          description: ID of pet to fetch
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  ######################
   # blog
   ######################
   /blogs:
     post:
       description: |
         blog post
-      operationId: create
+      x-eov-operation-id: create
       x-eov-operation-handler: routes/blogs
       requestBody:
         required: true
@@ -76,6 +132,31 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    User:
+      required:
+        - id
+        - strategy_id
+        - status
+        - role_id
+        - nickname
+      properties:
+        id:
+          type: number
+          readOnly: true
+        strategy_id:
+          type: string
+        status:
+          type: string
+          enum:
+            - invalid
+            - valid
+        role_id:
+          type: string
+          enum:
+            - viewer
+            - admin
+        nickname:
+          type: string
     Blog:
       required:
         - id

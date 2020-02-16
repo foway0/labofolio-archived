@@ -1,5 +1,5 @@
 import { Sequelize, Model } from 'sequelize';
-import { FindAndCountOptions } from 'sequelize/types/lib/model';
+import { FindAndCountOptions, FindOptions } from 'sequelize/types/lib/model';
 
 class SequelizeHelper {
   static create<M extends Model>(
@@ -14,6 +14,13 @@ class SequelizeHelper {
     options?: FindAndCountOptions
   ) {
     return model?.findAndCountAll(options);
+  }
+
+  static findOne<M extends Model>(
+    model?: { new (): M } & typeof Model,
+    options?: FindOptions
+  ) {
+    return model?.findOne(options);
   }
 
   static authenticate(sequelize?: Sequelize) {
