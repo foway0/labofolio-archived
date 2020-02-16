@@ -5,6 +5,8 @@ import Context from './context';
 
 (async (): Promise<void> => {
   await Context.initStore(config.mysql);
+  Context.initModels();
+  await Context.syncModels();
 
   const app = new ApiApplication(env.SERVICE_HOST, env.SERVICE_PORT);
   await app.init();

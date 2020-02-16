@@ -7,6 +7,7 @@ export default Object.freeze({
     password: env.MYSQL_PASSWORD,
     options: {
       dialect: 'mysql',
+      timezone: '+09:00',
       host: env.MYSQL_HOST
     }
   }

@@ -5,7 +5,7 @@ info:
   license:
     name: MIT
 servers:
-  - url: http://localhost:3000
+  - url: https://localhost:3000
 paths:
   /ping:
     get:
@@ -28,8 +28,92 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+
+  ######################
+  # blog
+  ######################
+  /blogs:
+    post:
+      description: |
+        blog post
+      operationId: create
+      x-eov-operation-handler: routes/blogs
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Blog'
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      description: |
+        blog list
+      operationId: list
+      x-eov-operation-handler: routes/blogs
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blogs'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Blog:
+      required:
+        - id
+        - status
+        - subject
+        - content_text
+        - content_md
+        - content_html
+      properties:
+        id:
+          type: number
+          readOnly: true
+        status:
+          type: string
+          enum:
+            - invalid
+            - valid
+        subject:
+          type: string
+        content_text:
+          type: string
+        conten_md:
+          type: string
+        content_html:
+          type: string
+    Blogs:
+      required:
+        - count
+        - rows
+      properties:
+        count:
+          type: integer
+          format: int32
+          minimum: 0
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Blog'
     Error:
       required:
         - code
@@ -40,3 +124,19 @@ components:
           format: int32
         message:
           type: string
+
+  parameters:
+    limit:
+      in: query
+      description: pagination limit
+      name: limit
+      schema:
+        type: integer
+      required: true
+    offset:
+      in: query
+      description: pagination offset
+      name: offset
+      schema:
+        type: integer
+      required: true

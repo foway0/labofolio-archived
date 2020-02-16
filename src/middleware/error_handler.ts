@@ -14,7 +14,16 @@ export const errorHandler: ErrorRequestHandler = (
   if (err.status && err.status === 404) {
     debug(`what??? (╯°□°）╯︵ ┻━┻`);
     res.status(404).send('what??? (╯°□°）╯︵ ┻━┻');
+  } else if (err.status) {
+    // format errors
+    res.status(err.status || 500).json({
+      message: err.message,
+      errors: err.errors
+    });
   } else {
-    res.status(500).end();
+    debug('---------');
+    debug(err);
+    debug('---------');
+    res.status(503).end();
   }
 };
